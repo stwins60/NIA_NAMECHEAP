@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <link rel="icon" href="{{ url_for('static', filename='images/favicon.png') }}" sizes="35x35" type="image/png">
+        <title>NIA - Nigerian Islamic Association</title>
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/all.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/flaticon.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/animate.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/jquery.fancybox.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/jquery.bootstrap-touchspin.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/perfect-scrollbar.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/slick.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/responsive.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/color.css') }}">
+    </head>
+    <body>
+        <main>
+            <div id="preloader">            
+                <div class="preloader-inner">
+                    <i class="preloader-icon thm-clr flaticon-kaaba"></i>
+                </div>
+            </div><!-- Page Loader -->
+            <header class="stick style1 w-100">
+                <div class="topbar bg-color1 d-flex flex-wrap justify-content-center w-100">
+                    <ul class="topbar-info-list mb-0 list-unstyled d-inline-flex">
+                        <li><i class="thm-clr flaticon-sun"></i>Sunrise At: <span class="thm-clr">{{ sunrise }}</span></li>
+                        <li><i class="thm-clr flaticon-moon"></i>Sunset At: <span class="thm-clr">{{ sunset }}</span></li>
+                    </ul>
+                    <div class="social-links d-inline-flex">
+                        
+                        <a href="https://www.facebook.com/profile.php?id=100064565504879&mibextid=ZbWKwL" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://youtube.com/@executiveboardnia3114" title="Youtube" target="_blank"><i class="fab fa-youtube"></i></a>
+                        
+                        
+                    </div>
+                </div><!-- Topbar -->
+                <div class="logo-menu-wrap d-flex flex-wrap justify-content-between w-100">
+                    <div class="logo position-relative thm-layer opc7 back-blend-multiply thm-bg" style="background-image: url('/static/images/pattern-bg.jpg');"><h1 class="mb-0" style="margin-top: 0px; padding-top: 0px; font-family: Arial, sans-serif; padding-bottom: 50px;"><a href="{{ url_for('index') }}" title="Home"></a>Nigerian Islamic Association</h1></div>
+                    <nav class="d-flex flex-wrap align-items-center justify-content-center">
+                        <div class="header-left">
+                            <ul class="mb-0 list-unstyled d-inline-flex">
+                                <li class="menu-item-has-children"><a href="javascript:void(0);" title="">Home</a>
+                                    <ul class="mb-0 list-unstyled">
+                                        <li><a href="{{ url_for('index') }}" title="">Home</a></li>
+                                    </ul>
+                                </li>
+                                <li class="menu-item-has-children"><a href="javascript:void(0);" title="">Pages</a>
+                                    <ul class="mb-0 list-unstyled">
+                                        <li class="menu-item-has-children"><a href="javascript:void(0);" title="">Donation</a>
+                                            <ul class="mb-0 list-unstyled">
+                                                <!-- <li><a href="{{ url_for('urgent_donation') }}" title="">Urgent Donation</a></li> -->
+                                                <li><a href="{{ url_for('donation_detail') }}" title="">Donation Detail</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="menu-item-has-children"><a href="javascript:void(0);" title="">Our Services</a>
+                                            <ul class="mb-0 list-unstyled">
+                                                <li><a href="{{ url_for('services') }}" title="">Services</a></li>
+                                                <
+                                                
+                                            </ul>
+                                        </li>
+                                        <li class="menu-item-has-children"><a href="javascript:void(0);" title="">Our Gallery</a>
+                                            <ul class="mb-0 list-unstyled">
+                                                <li><a href="{{ url_for('gallery') }}" title="">Gallery</a></li>
+                                                
+                                                
+                                            </ul>
+                                        </li>
+                                        <li class="menu-item-has-children"><a href="javascript:void(0);" title="">Our Events</a>
+                                            <ul class="mb-0 list-unstyled">
+                                                <li><a href="{{ url_for('events') }}" title="">Events</a></li>
+                                                
+                                            </ul>
+                                        </li>
+                                        <li><a href="{{ url_for('audio_listening') }}" title="">Quran Recitation</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="{{ url_for('projects')}}" title="">Projects</a></li>
+                                <li><a href="{{ url_for('about') }}" title="">About Us</a></li>
+                                <li><a href="{{ url_for('contact') }}" title="">Contact Us</a></li>
+                            </ul>
+                        </div>
+                        <div class="header-right">
+                            <a class="thm-btn thm-bg" href="{{ url_for('donation_detail') }}" title="">Make Donation<span></span><span></span><span></span><span></span></a>
+                        </div>
+                    </nav>
+                </div> <!--Logo Menu Wrap -->
+            </header><!-- Header -->
+            <div class="sticky-menu">
+                <div class="container">
+                    <div class="sticky-menu-inner d-flex flex-wrap align-items-center justify-content-between w-100">
+                        <!-- <div class="logo"><h1 class="mb-0"><a href="{{ url_for('index') }}" title="Home"><img class="img-fluid" src="{{ url_for('static', filename='images/logo3.png') }}" alt="Logo" srcset="{{ url_for('static', filename='images/retina-logo3.png') }}"></a></h1></div>Logo -->
+                        <nav class="d-flex flex-wrap align-items-center justify-content-between">
+                            <div class="header-left">
+                                <ul class="mb-0 list-unstyled d-inline-flex">
+                                    <li class="menu-item-has-children"><a href="javascript:void(0);" title="">Home</a>
+                                        <ul class="mb-0 list-unstyled">
+                                            <li><a href="{{ url_for('index') }}" title="">Home</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="menu-item-has-children"><a href="javascript:void(0);" title="">Pages</a>
+                                        <ul class="mb-0 list-unstyled">
+                                            <li class="menu-item-has-children"><a href="javascript:void(0);" title="">Donation</a>
+                                                <ul class="mb-0 list-unstyled">
+                                                    <!-- <li><a href="{{ url_for('urgent_donation') }}" title="">Urgent Donation</a></li> -->
+                                                    <li><a href="{{ url_for('donation_detail') }}" title="">Donation Detail</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="menu-item-has-children"><a href="javascript:void(0);" title="">Our Services</a>
+                                                <ul class="mb-0 list-unstyled">
+                                                    <li><a href="{{ url_for('services') }}" title="">Services</a></li>
+                                                    <
+                                                    
+                                                </ul>
+                                            </li>
+                                            <li class="menu-item-has-children"><a href="javascript:void(0);" title="">Our Gallery</a>
+                                                <ul class="mb-0 list-unstyled">
+                                                    <li><a href="{{ url_for('gallery') }}" title="">Gallery</a></li>
+                                                    
+                                                    
+                                                </ul>
+                                            </li>
+                                            <li class="menu-item-has-children"><a href="javascript:void(0);" title="">Our Events</a>
+                                                <ul class="mb-0 list-unstyled">
+                                                    <li><a href="{{ url_for('events') }}" title="">Events</a></li>
+                                                    
+                                                </ul>
+                                            </li>
+                                            <li><a href="{{ url_for('audio_listening') }}" title="">Quran Recitation</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="{{ url_for('projects')}}" title="">Projects</a></li>
+                                    <li><a href="{{ url_for('about') }}" title="">About Us</a></li>
+                                    <li><a href="{{ url_for('contact') }}" title="">Contact Us</a></li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div> <!-- Sticky Menu -->
+            <div class="rspn-hdr">
+                <div class="rspn-mdbr">
+                    <div class="rspn-scil">
+                        <ul class="topbar-info-list mb-0 list-unstyled d-inline-flex">
+                            <li><i class="thm-clr flaticon-sun"></i>Sunrise At: <span class="thm-clr" style="white-space: pre-line;">{{ sunrise }}</span></li>
+                            <li><i class="thm-clr flaticon-moon"></i>Sunset At: <span class="thm-clr" style="white-space: pre-line;">{{ sunset }}</span></li>
+                        </ul>
+                        <br>
+                        <a href="https://www.facebook.com/profile.php?id=100064565504879&mibextid=ZbWKwL" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://youtube.com/@executiveboardnia3114" title="Youtube" target="_blank"><i class="fab fa-youtube"></i></a>
+                        
+                    </div>
+                </div>
+                <div class="lg-mn">
+                    <!-- <div class="logo"><a href="{{ url_for('index') }}" title="Home"><img src="{{ url_for('static', filename='images/logo3.png') }}" alt="Logo"></a></div> -->
+                    <div class="rspn-cnt">
+                        <span><i class="thm-clr far fa-envelope"></i><a href="javascript:void(0);" title="">niaexecutiveboard@gmail.com</a></span>
+                        <span><i class="thm-clr fas fa-phone-alt"></i>773 665 2451</span>
+                    </div>
+                    <span class="rspn-mnu-btn"><i class="fa fa-list-ul"></i></span>
+                </div>
+                <div class="rsnp-mnu">
+                    <span class="rspn-mnu-cls"><i class="fa fa-times"></i></span>
+                    <ul class="mb-0 list-unstyled w-100">
+                        <li class="menu-item-has-children"><a href="javascript:void(0);" title="">Home</a>
+                            <ul class="mb-0 list-unstyled">
+                                <li><a href="{{ url_for('index') }}" title="">Home</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-item-has-children"><a href="javascript:void(0);" title="">Pages</a>
+                            <ul class="mb-0 list-unstyled">
+                                <!-- <li class="menu-item-has-children"><a href="javascript:void(0);" title="">Donation</a>
+                                    <ul class="mb-0 list-unstyled">
+                                        <li><a href="{{ url_for('urgent_donation') }}" title="">Urgent Donation</a></li>
+                                        <li><a href="{{ url_for('donation_detail') }}" title="">Donation Detail</a></li>
+                                    </ul>
+                                </li> -->
+                                <li class="menu-item-has-children"><a href="javascript:void(0);" title="">Our Services</a>
+                                    <ul class="mb-0 list-unstyled">
+                                        <li><a href="{{ url_for('services') }}" title="">Services</a></li>
+                                        <
+                                        
+                                    </ul>
+                                </li>
+                                <li class="menu-item-has-children"><a href="javascript:void(0);" title="">Our Gallery</a>
+                                    <ul class="mb-0 list-unstyled">
+                                        <li><a href="{{ url_for('gallery') }}" title="">Gallery</a></li>
+                                        
+                                        
+                                    </ul>
+                                </li>
+                                <li><a href="{{ url_for('audio_listening') }}" title="">Quran Recitation</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-item-has-children"><a href="javascript:void(0);" title="">Our Events</a>
+                            <ul class="mb-0 list-unstyled">
+                                <li><a href="{{ url_for('events') }}" title="">Events</a></li>
+                                
+                            </ul>
+                        </li>
+                        <li><a href="{{ url_for('donation_detail') }}" title="">Donation</a></li>
+                        <li><a href="{{ url_for('projects')}}" title="">Projects</a></li>
+                        <li><a href="{{ url_for('about') }}" title="">About Us</a></li>
+                        <li><a href="{{ url_for('contact') }}" title="">Contact Us</a></li>
+                    </ul>
+                </div><!-- Responsive Menu -->
+            </div><!-- Responsive Header -->
+            <section>
+                <div class="w-100 pt-80 black-layer pb-70 opc65 position-relative">
+                    <div class="fixed-bg" style="background-image: url({{ url_for('static', filename='images/page-title-bg.jpg') }});"></div>
+                    <div class="container">
+                        <div class="page-title-wrap text-center w-100">
+                            <div class="page-title-inner d-inline-block">
+                                <h1 class="mb-0">Contact Us</h1>
+                                <ol class="breadcrumb mb-0">
+                                    <li class="breadcrumb-item"><a href="{{ url_for('index') }}" title="Home">NIA - Home</a></li>
+                                    <li class="breadcrumb-item active">Contact Us</li>
+                                </ol>
+                            </div>
+                        </div><!-- Page Title Wrap -->
+                    </div>
+                </div>
+            </section>
+            <section>
+                <div class="w-100 pt-120 pb-250 position-relative">
+                    <img class="sec-botm-rgt-mckp img-fluid position-absolute" src="{{ url_for('static', filename='images/sec-botm-mckp.png') }}" alt="Sec Bottom Mockup">
+                    <div class="container">
+                        <div class="gallery-wrap w-100">
+                            <div class="row mrg">
+                                <div class="col-md-12 col-sm-12 col-lg-9">
+                                    <div class="row mrg">
+                                        <div class="col-md-12 col-sm-12 col-lg-8">
+                                            <div class="gallery-box v2 text-center overflow-hidden position-relative w-100">
+                                                <img class="img-fluid w-100" src="{{ url_for('static', filename='images/resources/gallery-img3-1.jpg') }}" alt="Gallery Image 1">
+                                                <div class="gallery-info position-absolute">
+                                                    
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 col-lg-4">
+                                            <div class="gallery-box v2 text-center overflow-hidden position-relative w-100">
+                                                <img class="img-fluid w-100" src="{{ url_for('static', filename='images/resources/gallery-img3-2.jpg') }}" alt="Gallery Image 2">
+                                                <div class="gallery-info position-absolute">
+                                                    
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 col-lg-4">
+                                            <div class="gallery-box v2 text-center overflow-hidden position-relative w-100">
+                                                <img class="img-fluid w-100" src="{{ url_for('static', filename='images/resources/gallery-img3-3.jpg') }}" alt="Gallery Image 3">
+                                                <div class="gallery-info position-absolute">
+                                                    
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-lg-8">
+                                            <div class="gallery-box v2 text-center overflow-hidden position-relative w-100">
+                                                <img class="img-fluid w-100" src="{{ url_for('static', filename='images/resources/gallery-img3-4.jpg') }}" alt="Gallery Image 4">
+                                                <div class="gallery-info position-absolute">
+                                                    
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-lg-3">
+                                    <div class="gallery-box v2 text-center overflow-hidden position-relative w-100">
+                                        <img class="img-fluid w-100" src="{{ url_for('static', filename='images/resources/gallery-img3-5.jpg') }}" alt="Gallery Image 5">
+                                        <div class="gallery-info position-absolute">
+                                            
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- Gallery Wrap -->
+                        <div class="pagination-wrap mt-70 d-flex flex-wrap justify-content-center text-center w-100">
+                            <ul class="pagination mb-0">
+                                <li class="page-item prev"><a class="page-link" href="javascript:void(0);" title=""><i class="fas fa-long-arrow-alt-left"></i></a></li>
+                                <li class="page-item"><a class="page-link" href="javascript:void(0);" title="">1</a></li>
+                                <li class="page-item active"><a class="page-link" href="javascript:void(0);" title="">2</a></li>
+                                <li class="page-item"><a class="page-link" href="javascript:void(0);" title="">3</a></li>
+                                <li class="page-item"><a class="page-link" href="javascript:void(0);" title="">4</a></li>
+                                <li class="page-item pg-rang">...........</li>
+                                <li class="page-item"><a class="page-link" href="javascript:void(0);" title="">24</a></li>
+                                <li class="page-item next"><a class="page-link" href="javascript:void(0);" title=""><i class="fas fa-long-arrow-alt-right"></i></a></li>
+                            </ul>
+                        </div><!-- Pagination Wrap -->
+                    </div>
+                </div>
+            </section>
+            <footer>
+                <div class="w-100 pt-100 dark-layer pb-50 opc85 position-relative">
+                    <div class="fixed-bg patern-bg back-blend-multiply dark-bg" style="background-image: url('/static/images/pattern-bg.jpg');"></div>
+                    <div class="container">
+                        <div class="footer-data w-100">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-lg-3">
+                                    <div class="widget w-100">
+                                        <!--- <div class="logo"><h1 class="mb-0"><a href="{{ url_for('index') }}" title="Home"><img class="img-fluid" src="{{ url_for('static', filename='images/logo2.png') }}" alt="Logo" srcset="{{ url_for('static', filename='images/default.png') }}"></a></h1></div> --->
+                                        <p class="mb-0">Our mission is to propagate the teachings and practices of Islam among mankind in accordance with the teachings of the Holy Quran and the traditions of the Prophet Muhammad (SAW). <br>
+ Our purpose to propagate the teachings and principles of Islam, to further the education, social, cultural and charitable interests of Islamic communities and mankind and to promote the general welfare of all.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-lg-9">
+                                    <div class="row justify-content-between">
+                                        <div class="col-md-6 col-sm-6 col-lg-6">
+                                            <div class="row">
+                                                <div class="col-md-6 col-sm-6 col-lg-6">
+                                                    <div class="widget w-100">
+                                                        <h4 class="widget-title">Information</h4>
+                                                        <ul class="mb-0 list-unstyled w-100">
+                                                            <!-- <li><a href="{{ url_for('online_courses') }}" title="">Online Courses</a></li> -->
+                                                            <li><a href="{{ url_for('audio_listening') }}" title="">Quran Recitation</a></li>
+                                                            <!-- <li><a href="{{ url_for('blog') }}" title="">Our Blog</a></li> -->
+                                                            <li><a href="{{ url_for('events') }}" title="">Our Events</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-lg-6">
+                                                    <div class="widget w-100">
+                                                        <h4 class="widget-title">Contact Info</h4>
+                                                        <ul class="cont-info-list2 mb-0 list-unstyled w-100">
+                                                            <li><i class="thm-clr">P:</i>773 665 2451</li>
+                                                            <li><i class="thm-clr">E:</i><a href="javascript:void(0);" title="">niaexecutiveboard@gmail.com</a></li>
+                                                            <li>932 W Sheridan Rd, Chicago, Illinois, USA</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 col-sm-6 col-lg-5">
+                                            <h4 class="widget-title">Let Us Help You</h4>
+                                            <div class="row">
+                                                <div class="col-md-6 col-sm-6 col-lg-6">
+                                                    <div class="widget w-100">
+                                                        <ul class="mb-0 list-unstyled w-100">
+                                                            <li><a href="{{ url_for('about') }}" title="">About NIA</a></li>
+                                                            <!-- <li><a href="{{ url_for('urgent_donation') }}" title="">Urgent Donation</a></li> -->
+                                                            <li><a href="{{ url_for('services') }}" title="">Our Services</a></li>
+                                                            <!-- <li><a href="{{ url_for('sermons') }}" title="">Our Sermons</a></li> -->
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-lg-6">
+                                                    <div class="widget w-100">
+                                                        <ul class="mb-0 list-unstyled w-100">
+                                                            <!-- <li><a href="{{ url_for('products') }}" title="">Our Products</a></li> -->
+                                                            <!--- <li><a href="{{ url_for('scholar_style1') }}" title="">Our Scholars</a></li> -->
+                                                            <li><a href="{{ url_for('contact') }}" title="">Contact Us</a></li>
+                                                            <li><a href="{{ url_for('gallery') }}" title="">NIA Gallery</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- Footer Data -->
+                    </div>
+                </div>
+            </footer><!-- Footer -->
+            <div class="bottom-bar dark-bg2 text-center w-100">
+                <p class="mb-0"><a href="{{ url_for('index') }}" title="Home">NIA</a> - Copyright 2023. Design by <a href="https://themeforest.net/user/nauthemes/portfolio" title="Nauthemes" target="_blank">Nauthemes</a></p>
+            </div><!-- Bottom Bar -->
+        </main><!-- Main Wrapper -->
+
+        <script src="{{ url_for('static', filename='/js/jquery.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='/js/popper.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='/js/bootstrap.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='/js/wow.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='/js/counterup.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='/js/jquery.fancybox.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='/js/jquery.bootstrap-touchspin.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='/js/perfect-scrollbar.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='/js/slick.min.js') }}"></script>
+        <!-- <script src="{{ url_for('static', filename='/js/particles.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='/js/particle-int.js') }}"></script> -->
+        <script src="{{ url_for('static', filename='/js/musicplayer-min.js') }}"></script>
+        <script src="{{ url_for('static', filename='/js/custom-scripts.js') }}"></script>
+    </body>	
+</html>

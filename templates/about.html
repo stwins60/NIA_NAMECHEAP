@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <link rel="icon" href="{{ url_for('static', filename='images/favicon.png') }}" sizes="35x35" type="image/png">
+        <title>NIA - Nigerian Islamic Association</title>
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/all.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/flaticon.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/animate.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/jquery.fancybox.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/jquery.bootstrap-touchspin.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/perfect-scrollbar.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/slick.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/responsive.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/color.css') }}">
+    </head>
+    <body>
+        <main>
+            <div id="preloader">            
+                <div class="preloader-inner">
+                    <i class="preloader-icon thm-clr flaticon-kaaba"></i>
+                </div>
+            </div><!-- Page Loader -->
+            <header class="stick style1 w-100">
+                <div class="topbar bg-color1 d-flex flex-wrap justify-content-center w-100">
+                    <ul class="topbar-info-list mb-0 list-unstyled d-inline-flex">
+                        <li><i class="thm-clr flaticon-sun"></i>Sunrise At: <span class="thm-clr">{{ sunrise }}</span></li>
+                        <li><i class="thm-clr flaticon-moon"></i>Sunset At: <span class="thm-clr">{{ sunset }}</span></li>
+                    </ul>
+                    <div class="social-links d-inline-flex">
+                        
+                        <a href="https://www.facebook.com/profile.php?id=100064565504879&mibextid=ZbWKwL" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://youtube.com/@executiveboardnia3114" title="Youtube" target="_blank"><i class="fab fa-youtube"></i></a>
+                        
+                        
+                    </div>
+                </div>
+                <!-- Topbar -->
+                <div class="logo-menu-wrap d-flex flex-wrap justify-content-between w-100">
+                    <div class="logo position-relative thm-layer opc7 back-blend-multiply thm-bg" style="background-image: url('/static/images/pattern-bg.jpg');"><h1 class="mb-0" style="margin-top: 0px; padding-top: 0px; font-family: Arial, sans-serif; padding-bottom: 50px;"><a href="{{ url_for('index') }}" title="Home"></a>Nigerian Islamic Association</h1></div>
+                    <nav class="d-flex flex-wrap align-items-center justify-content-center">
+                        <div class="header-left">
+                            <ul class="mb-0 list-unstyled d-inline-flex">
+                                <li class="menu-item-has-children"><a href="javascript:void(0);" title="">Home</a>
+                                    <ul class="mb-0 list-unstyled">
+                                        <li><a href="{{ url_for('index') }}" title="">Home</a></li>
+                                    </ul>
+                                </li>
+                                <li class="menu-item-has-children"><a href="javascript:void(0);" title="">Pages</a>
+                                    <ul class="mb-0 list-unstyled">
+                                        <li class="menu-item-has-children"><a href="javascript:void(0);" title="">Donation</a>
+                                            <ul class="mb-0 list-unstyled">
+                                                <!-- <li><a href="{{ url_for('urgent_donation') }}" title="">Urgent Donation</a></li> -->
+                                                <li><a href="{{ url_for('donation_detail') }}" title="">Donation Detail</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="menu-item-has-children"><a href="javascript:void(0);" title="">Our Services</a>
+                                            <ul class="mb-0 list-unstyled">
+                                                <li><a href="{{ url_for('services') }}" title="">Services</a></li>
+                                                
+                                            </ul>
+                                        </li>
+                                        <li class="menu-item-has-children"><a href="javascript:void(0);" title="">Our Gallery</a>
+                                            <ul class="mb-0 list-unstyled">
+                                                <li><a href="{{ url_for('gallery') }}" title="">Gallery</a></li>
+                                                
+                                                
+                                            </ul>
+                                        </li>
+                                        <li class="menu-item-has-children"><a href="javascript:void(0);" title="">Our Events</a>
+                                            <ul class="mb-0 list-unstyled">
+                                                <li><a href="{{ url_for('events') }}" title="">Events</a></li>
+                                                
+                                            </ul>
+                                        </li>
+                                        <li><a href="{{ url_for('audio_listening') }}" title="">Quran Recitation</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="{{ url_for('projects')}}" title="">Projects</a></li>
+                                <li><a href="{{ url_for('about') }}" title="">About Us</a></li>
+                                <li><a href="{{ url_for('contact') }}" title="">Contact Us</a></li>
+                            </ul>
+                        </div>
+                        <div class="header-right">
+                            <a class="thm-btn thm-bg" href="{{ url_for('donation_detail') }}" title="">Make Donation<span></span><span></span><span></span><span></span></a>
+                        </div>
+                    </nav>
+                </div> <!--Logo Menu Wrap -->
+            </header><!-- Header -->
+            <div class="sticky-menu">
+                <div class="container">
+                    <div class="sticky-menu-inner d-flex flex-wrap align-items-center justify-content-between w-100">
+                        <!-- <div class="logo"><h1 class="mb-0"><a href="{{ url_for('index') }}" title="Home"><img class="img-fluid" src="{{ url_for('static', filename='images/logo3.png') }}" alt="Logo" srcset="{{ url_for('static', filename='images/retina-logo3.png') }}"></a></h1></div>Logo -->
+                        <nav class="d-flex flex-wrap align-items-center justify-content-between">
+                            <div class="header-left">
+                                <ul class="mb-0 list-unstyled d-inline-flex">
+                                    <li class="menu-item-has-children"><a href="javascript:void(0);" title="">Home</a>
+                                        <ul class="mb-0 list-unstyled">
+                                            <li><a href="{{ url_for('index') }}" title="">Home</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="menu-item-has-children"><a href="javascript:void(0);" title="">Pages</a>
+                                        <ul class="mb-0 list-unstyled">
+                                            <li class="menu-item-has-children"><a href="javascript:void(0);" title="">Donation</a>
+                                                <ul class="mb-0 list-unstyled">
+                                                    <!-- <li><a href="{{ url_for('urgent_donation') }}" title="">Urgent Donation</a></li> -->
+                                                    <li><a href="{{ url_for('donation_detail') }}" title="">Donation Detail</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="menu-item-has-children"><a href="javascript:void(0);" title="">Our Services</a>
+                                                <ul class="mb-0 list-unstyled">
+                                                    <li><a href="{{ url_for('services') }}" title="">Services</a></li>
+                                                    
+                                                </ul>
+                                            </li>
+                                            <li class="menu-item-has-children"><a href="javascript:void(0);" title="">Our Gallery</a>
+                                                <ul class="mb-0 list-unstyled">
+                                                    <li><a href="{{ url_for('gallery') }}" title="">Gallery</a></li>
+                                                    
+                                                    
+                                                </ul>
+                                            </li>
+                                            <li class="menu-item-has-children"><a href="javascript:void(0);" title="">Our Events</a>
+                                                <ul class="mb-0 list-unstyled">
+                                                    <li><a href="{{ url_for('events') }}" title="">Events</a></li>
+                                                    
+                                                </ul>
+                                            </li>
+                                            <li class="menu-item-has-children"><a href="javascript:void(0);" title="">Our Sermons</a>
+                                                <ul class="mb-0 list-unstyled">
+                                                    <li><a href="{{ url_for('sermons') }}" title="">Sermons</a></li>
+                                                    <li><a href="{{ url_for('sermons_detail') }}" title="">Sermons Detail</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="{{ url_for('audio_listening') }}" title="">Quran Recitation</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="{{ url_for('projects')}}" title="">Projects</a></li>
+                                    <li><a href="{{ url_for('about') }}" title="">About Us</a></li>
+                                    <li><a href="{{ url_for('contact') }}" title="">Contact Us</a></li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div> <!-- Sticky Menu -->
+            <div class="rspn-hdr">
+                <div class="rspn-mdbr">
+                    <div class="rspn-scil">
+                        <ul class="topbar-info-list mb-0 list-unstyled d-inline-flex">
+                            <li><i class="thm-clr flaticon-sun"></i>Sunrise At: <span class="thm-clr" style="white-space: pre-line;">{{ sunrise }}</span></li>
+                            <li><i class="thm-clr flaticon-moon"></i>Sunset At: <span class="thm-clr" style="white-space: pre-line;">{{ sunset }}</span></li>
+                        </ul>
+                        <br>
+                        <a href="https://www.facebook.com/profile.php?id=100064565504879&mibextid=ZbWKwL" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://youtube.com/@executiveboardnia3114" title="Youtube" target="_blank"><i class="fab fa-youtube"></i></a>
+                        
+                    </div>
+                </div>
+                <div class="lg-mn">
+                    <!-- <div class="logo"><a href="{{ url_for('index') }}" title="Home"><img src="{{ url_for('static', filename='images/logo3.png') }}" alt="Logo"></a></div> -->
+                    <div class="rspn-cnt">
+                        <span><i class="thm-clr far fa-envelope"></i><a href="javascript:void(0);" title="">niaexecutiveboard@gmail.com</a></span>
+                        <span><i class="thm-clr fas fa-phone-alt"></i>773 665 2451</span>
+                    </div>
+                    <span class="rspn-mnu-btn"><i class="fa fa-list-ul"></i></span>
+                </div>
+                <div class="rsnp-mnu">
+                    <span class="rspn-mnu-cls"><i class="fa fa-times"></i></span>
+                    <ul class="mb-0 list-unstyled w-100">
+                        <li class="menu-item-has-children"><a href="javascript:void(0);" title="">Home</a>
+                            <ul class="mb-0 list-unstyled">
+                                <li><a href="{{ url_for('index') }}" title="">Home</a></li>
+                                <!--- <li><a href="{{ url_for('index2') }}" title="">Homepage 2</a></li>
+                                <li><a href="{{ url_for('index3') }}" title="">Homepage 3</a></li> -->
+                            </ul>
+                        </li>
+                        <li class="menu-item-has-children"><a href="javascript:void(0);" title="">Pages</a>
+                            <ul class="mb-0 list-unstyled">
+                                <!-- <li class="menu-item-has-children"><a href="javascript:void(0);" title="">Donation</a>
+                                    <ul class="mb-0 list-unstyled">
+                                        <li><a href="{{ url_for('urgent_donation') }}" title="">Urgent Donation</a></li>
+                                        <li><a href="{{ url_for('donation_detail') }}" title="">Donation Detail</a></li>
+                                    </ul>
+                                </li> -->
+                                <li class="menu-item-has-children"><a href="javascript:void(0);" title="">Our Services</a>
+                                    <ul class="mb-0 list-unstyled">
+                                        <li><a href="{{ url_for('services') }}" title="">Services</a></li>
+                                        
+                                    </ul>
+                                </li>
+                                <li class="menu-item-has-children"><a href="javascript:void(0);" title="">Our Gallery</a>
+                                    <ul class="mb-0 list-unstyled">
+                                        <li><a href="{{ url_for('gallery') }}" title="">Gallery</a></li>
+                                        
+                                        
+                                    </ul>
+                                </li>
+                                <li><a href="{{ url_for('audio_listening') }}" title="">Quran Recitation</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-item-has-children"><a href="javascript:void(0);" title="">Our Events</a>
+                            <ul class="mb-0 list-unstyled">
+                                <li><a href="{{ url_for('events') }}" title="">Events</a></li>
+                                
+                            </ul>
+                        </li>
+                        <li><a href="{{ url_for('donation_detail') }}" title="">Donation</a></li>
+                        <li><a href="{{ url_for('projects')}}" title="">Projects</a></li>
+                        <li><a href="{{ url_for('about') }}" title="">About Us</a></li>
+                        <li><a href="{{ url_for('contact') }}" title="">Contact Us</a></li>
+                    </ul>
+                </div><!-- Responsive Menu -->
+            </div><!-- Responsive Header -->
+            <section>
+                <div class="w-100 pt-80 black-layer pb-70 opc65 position-relative">
+                    <div class="fixed-bg" style="background-image: url({{ url_for('static', filename='images/page-title-bg.jpg') }});"></div>
+                    <div class="container">
+                        <div class="page-title-wrap text-center w-100">
+                            <div class="page-title-inner d-inline-block">
+                                <h1 class="mb-0">About Us</h1>
+                                <ol class="breadcrumb mb-0">
+                                    <li class="breadcrumb-item"><a href="{{ url_for('index') }}" title="Home">NIA - Home</a></li>
+                                    <li class="breadcrumb-item active">About Us</li>
+                                </ol>
+                            </div>
+                        </div><!-- Page Title Wrap -->
+                    </div>
+                </div>
+            </section>
+            <section>
+                <div class="w-100 pt-120 pb-100 position-relative">
+                    <div class="container">
+                        <div class="about-wrap4 w-100">
+                            <div class="row align-items-center">
+                                <!-- <div class="col-md-12 col-sm-12 col-lg-7 order-lg-1">
+                                    <div class="about-video position-relative w-100">
+                                        <img class="img-fluid w-100" src="{{ url_for('static', filename='images/resources/about-img.jpg') }}" alt="About Image">
+                                        <a class="position-absolute spinner bg-color1" href="https://www.youtube.com/@nia-yeefmultimedia5535embed/WxuHBTES2-s" data-fancybox title=""><i class="fas fa-play"></i></a>
+                                    </div>
+                                </div> -->
+                                <div class="col-md-12 col-sm-12 col-lg-5">
+                                    <div class="about-inner4 w-100">
+                                        <span class="d-block thm-clr">About US</span>
+                                        <!-- <h2 class="mb-0">Know The Real History Of Islam</h2> -->
+                                        <p class="mb-0">The Nigerian Islamic Association (N.I.A.) is a 501 ( c) corporation borne by the vision of an array of young Nigerian Immigrants who in the late 1980s came together as a group to create a religious and cultural identity for fellow Nigerians and the larger African community in Chicago. It all began with small congregational prayer meetings every Sunday at members’ houses in turns and later moved to a rented space on W. Foster Avenue, Chicago. In 1994, the Organization acquired its first and current location on 932 W Sheridan Road, Chicago, 60613, and has continued to grow in membership and programs. As of today, the Nigerian Islamic Association is one of the largest Nigerian Muslim communities in the United States of America.</p>
+                                        <img class="img-fluid w-100" src="{{ url_for('static', filename='images/resources/about-img.jpg') }}" alt="About Image">
+                                        <p class="mb-0">The N.I.A. is the cradle of all other Nigerian Muslim Communities in Chicagoland. The Center has always served as a place of worship for all Muslims and as a community center to a large extent. Families have grown and new families continue to spring up. Children are raised and nurtured with Quranic and Islamic education alongside Western education, thus resulting in well-branded citizens with pride in their Islamic faith and their socio-cultural heritage without sacrificing their American identity and good citizenship. The day-to-day running of the N.I.A. is funded by donations from members; managed through members volunteering service. The Organization offers regular five daily prayers, Jumat Prayer service, Lutfullah prayers, weekly Assalat congregation, weekend Quran and Islamic learning classes, monthly Halqah, welfare assistance program, preventive and wellness health service among others.</p>
+                                        <p class="mb-0">With continuous membership growth, the compelling need to cater to members now living miles away from the current location, and the need to provide opportunities for Muslims living or working around the southeast axis of Chicago, the Southside Islamic Center is coming soon on 8561 S. South Chicago Avenue, Chicago, IL. <br>
+                                            If you want to know more about us, click on contact us for information about how to reach us.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- About Wrap 4 -->
+                    </div>
+                </div>
+            </section>
+            <section>
+                <div class="w-100 pt-90 gray-layer pb-250 opc85 position-relative">
+                    <div class="fixed-bg patern-bg back-blend-multiply gray-bg" style="background-image: url('/static/images/pattern-bg.jpg');"></div>
+                    <!-- <img class="sec-botm-rgt-mckp img-fluid position-absolute" src="{{ url_for('static', filename='images/sec-botm-mckp.png') }}" alt="Sec Bottom Mockup"> -->
+                    <div class="container">
+                        <div class="sec-title text-center w-100">
+                            <div class="sec-title-inner d-inline-block">
+                                <i class="thm-clr flaticon-rub-el-hizb"></i>
+                                <h2 class="mb-0">Imam</h2>
+                            </div>
+                        </div><!-- Sec Title -->
+                        <div class="team-wrap res-row wide-sec2">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-6 col-lg-3">
+                                    <div class="team-box text-center w-100">
+                                        <div class="team-img overflow-hidden position-relative w-100">
+                                            <!-- <img class="img-fluid w-100" src="{{ url_for('static', filename='images/resources/team-img1-1.jpg') }}" alt="Team Image 1"> -->
+                                            <!-- <div class="social-links2 text-center d-inline-flex position-absolute">
+                                                <a class="facebook" href="https://www.facebook.com/profile.php?id=100064565504879&mibextid=ZbWKwL" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                                <a class="twitter" href="https://twitter.com/" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                                                <a class="youtube" href="https://www.youtube.com/" title="Youtube" target="_blank"><i class="fab fa-youtube"></i></a>
+                                            </div> -->
+                                        </div>
+                                        <div class="team-info">
+                                            <h3 class="mb-0" style="text-align: center;">Shakiru Nasiru</h3>
+                                            <!-- <span class="d-block thm-clr">Scholar</span> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="sec-title text-center w-100">
+                            <div class="sec-title-inner d-inline-block">
+                                <i class="thm-clr flaticon-rub-el-hizb"></i>
+                                <h2 class="mb-0">Board of Trustees</h2>
+                            </div>
+                        </div><!-- Sec Title -->
+                        <div class="team-wrap res-row wide-sec2">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-6 col-lg-3">
+                                    <div class="team-box text-center w-100">
+                                        <div class="team-img overflow-hidden position-relative w-100">
+                                            <!-- <img class="img-fluid w-100" src="{{ url_for('static', filename='images/resources/team-img1-1.jpg') }}" alt="Team Image 1"> -->
+                                            <!-- <div class="social-links2 text-center d-inline-flex position-absolute">
+                                                <a class="facebook" href="https://www.facebook.com/profile.php?id=100064565504879&mibextid=ZbWKwL" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                                <a class="twitter" href="https://twitter.com/" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                                                <a class="youtube" href="https://www.youtube.com/" title="Youtube" target="_blank"><i class="fab fa-youtube"></i></a>
+                                            </div> -->
+                                        </div>
+                                        <div class="team-info">
+                                            <h3 class="mb-0">Shaffideen Amuwo</h3>
+                                            <span class="d-block thm-clr">Chairman</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-lg-3">
+                                    <div class="team-box text-center w-100">
+                                        <div class="team-img overflow-hidden position-relative w-100">
+                                            <!-- <img class="img-fluid w-100" src="{{ url_for('static', filename='images/resources/team-img1-2.jpg') }}" alt="Team Image 2"> -->
+                                            <!-- <div class="social-links2 text-center d-inline-flex position-absolute">
+                                                <a class="facebook" href="https://www.facebook.com/profile.php?id=100064565504879&mibextid=ZbWKwL" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                                <a class="twitter" href="https://twitter.com/" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                                                <a class="youtube" href="https://www.youtube.com/" title="Youtube" target="_blank"><i class="fab fa-youtube"></i></a>
+                                            </div> -->
+                                        </div>
+                                        <div class="team-info">
+                                            <h3 class="mb-0">Tajudeen Ogbara</h3>
+                                            <span class="d-block thm-clr"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-lg-3">
+                                    <div class="team-box text-center w-100">
+                                        <div class="team-img overflow-hidden position-relative w-100">
+                                            <!-- <img class="img-fluid w-100" src="{{ url_for('static', filename='images/resources/team-img1-3.jpg') }}" alt="Team Image 3"> -->
+                                            <!-- <div class="social-links2 text-center d-inline-flex position-absolute">
+                                                <a class="facebook" href="https://www.facebook.com/profile.php?id=100064565504879&mibextid=ZbWKwL" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                                <a class="twitter" href="https://twitter.com/" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                                                <a class="youtube" href="https://www.youtube.com/" title="Youtube" target="_blank"><i class="fab fa-youtube"></i></a>
+                                            </div> -->
+                                        </div>
+                                        <div class="team-info">
+                                            <h3 class="mb-0">Moruf Tunji Alausa</h3>
+                                            <span class="d-block thm-clr"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-lg-3">
+                                    <div class="team-box text-center w-100">
+                                        <div class="team-img overflow-hidden position-relative w-100">
+                                            <!-- <img class="img-fluid w-100" src="{{ url_for('static', filename='images/resources/team-img1-4.jpg') }}" alt="Team Image 4"> -->
+                                            <!-- <div class="social-links2 text-center d-inline-flex position-absolute">
+                                                <a class="facebook" href="https://www.facebook.com/profile.php?id=100064565504879&mibextid=ZbWKwL" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                                <a class="twitter" href="https://twitter.com/" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                                                <a class="youtube" href="https://www.youtube.com/" title="Youtube" target="_blank"><i class="fab fa-youtube"></i></a>
+                                            </div> -->
+                                        </div>
+                                        <div class="team-info">
+                                            <h3 class="mb-0">Musa Kolawole</h3>
+                                            <span class="d-block thm-clr"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-lg-3">
+                                    <div class="team-box text-center w-100">
+                                        <div class="team-img overflow-hidden position-relative w-100">
+                                            <!-- <img class="img-fluid w-100" src="{{ url_for('static', filename='images/resources/team-img1-4.jpg') }}" alt="Team Image 4"> -->
+                                            <!-- <div class="social-links2 text-center d-inline-flex position-absolute">
+                                                <a class="facebook" href="https://www.facebook.com/profile.php?id=100064565504879&mibextid=ZbWKwL" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                                <a class="twitter" href="https://twitter.com/" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                                                <a class="youtube" href="https://www.youtube.com/" title="Youtube" target="_blank"><i class="fab fa-youtube"></i></a>
+                                            </div> -->
+                                        </div>
+                                        <div class="team-info">
+                                            <h3 class="mb-0">Folashade Kareem Shittu</h3>
+                                            <span class="d-block thm-clr"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-lg-3">
+                                    <div class="team-box text-center w-100">
+                                        <div class="team-img overflow-hidden position-relative w-100">
+                                            <!-- <img class="img-fluid w-100" src="{{ url_for('static', filename='images/resources/team-img1-4.jpg') }}" alt="Team Image 4"> -->
+                                            <!-- <div class="social-links2 text-center d-inline-flex position-absolute">
+                                                <a class="facebook" href="https://www.facebook.com/profile.php?id=100064565504879&mibextid=ZbWKwL" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                                <a class="twitter" href="https://twitter.com/" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                                                <a class="youtube" href="https://www.youtube.com/" title="Youtube" target="_blank"><i class="fab fa-youtube"></i></a>
+                                            </div> -->
+                                        </div>
+                                        <div class="team-info">
+                                            <h3 class="mb-0">Ganiat Disu</h3>
+                                            <span class="d-block thm-clr"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sec-title text-center w-100">
+                            <div class="sec-title-inner d-inline-block">
+                                <i class="thm-clr flaticon-rub-el-hizb"></i>
+                                <h2 class="mb-0">Executive Board</h2>
+                            </div>
+                        </div><!-- Sec Title -->
+                        <div class="team-wrap res-row wide-sec2">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-6 col-lg-3">
+                                    <div class="team-box text-center w-100">
+                                        <div class="team-img overflow-hidden position-relative w-100">
+                                            <!-- <img class="img-fluid w-100" src="{{ url_for('static', filename='images/resources/team-img1-1.jpg') }}" alt="Team Image 1"> -->
+                                            <!-- <div class="social-links2 text-center d-inline-flex position-absolute">
+                                                <a class="facebook" href="https://www.facebook.com/profile.php?id=100064565504879&mibextid=ZbWKwL" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                                <a class="twitter" href="https://twitter.com/" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                                                <a class="youtube" href="https://www.youtube.com/" title="Youtube" target="_blank"><i class="fab fa-youtube"></i></a>
+                                            </div> -->
+                                        </div>
+                                        <div class="team-info">
+                                            <h3 class="mb-0">Olarewaju Ibrahim Abayomi</h3>
+                                            <span class="d-block thm-clr">Chairman</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-lg-3">
+                                    <div class="team-box text-center w-100">
+                                        <div class="team-img overflow-hidden position-relative w-100">
+                                            <!-- <img class="img-fluid w-100" src="{{ url_for('static', filename='images/resources/team-img1-2.jpg') }}" alt="Team Image 2"> -->
+                                            <!-- <div class="social-links2 text-center d-inline-flex position-absolute">
+                                                <a class="facebook" href="https://www.facebook.com/profile.php?id=100064565504879&mibextid=ZbWKwL" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                                <a class="twitter" href="https://twitter.com/" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                                                <a class="youtube" href="https://www.youtube.com/" title="Youtube" target="_blank"><i class="fab fa-youtube"></i></a>
+                                            </div> -->
+                                        </div>
+                                        <div class="team-info">
+                                            <h3 class="mb-0">Abdulganiyu Yesufu</h3>
+                                            <span class="d-block thm-clr">Vice Chairman</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-lg-3">
+                                    <div class="team-box text-center w-100">
+                                        <div class="team-img overflow-hidden position-relative w-100">
+                                            <!-- <img class="img-fluid w-100" src="{{ url_for('static', filename='images/resources/team-img1-3.jpg') }}" alt="Team Image 3"> -->
+                                            <!-- <div class="social-links2 text-center d-inline-flex position-absolute">
+                                                <a class="facebook" href="https://www.facebook.com/profile.php?id=100064565504879&mibextid=ZbWKwL" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                                <a class="twitter" href="https://twitter.com/" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                                                <a class="youtube" href="https://www.youtube.com/" title="Youtube" target="_blank"><i class="fab fa-youtube"></i></a>
+                                            </div> -->
+                                        </div>
+                                        <div class="team-info">
+                                            <h3 class="mb-0">Harun Oluwa</h3>
+                                            <span class="d-block thm-clr">General Secretary</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-lg-3">
+                                    <div class="team-box text-center w-100">
+                                        <div class="team-img overflow-hidden position-relative w-100">
+                                            <!-- <img class="img-fluid w-100" src="{{ url_for('static', filename='images/resources/team-img1-4.jpg') }}" alt="Team Image 4"> -->
+                                            <!-- <div class="social-links2 text-center d-inline-flex position-absolute">
+                                                <a class="facebook" href="https://www.facebook.com/profile.php?id=100064565504879&mibextid=ZbWKwL" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                                <a class="twitter" href="https://twitter.com/" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                                                <a class="youtube" href="https://www.youtube.com/" title="Youtube" target="_blank"><i class="fab fa-youtube"></i></a>
+                                            </div> -->
+                                        </div>
+                                        <div class="team-info">
+                                            <h3 class="mb-0">Adiat Ewuosho</h3>
+                                            <span class="d-block thm-clr">Assistant Secretary</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-lg-3">
+                                    <div class="team-box text-center w-100">
+                                        <div class="team-img overflow-hidden position-relative w-100">
+                                            <!-- <img class="img-fluid w-100" src="{{ url_for('static', filename='images/resources/team-img1-1.jpg') }}" alt="Team Image 1"> -->
+                                            <!-- <div class="social-links2 text-center d-inline-flex position-absolute">
+                                                <a class="facebook" href="https://www.facebook.com/profile.php?id=100064565504879&mibextid=ZbWKwL" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                                <a class="twitter" href="https://twitter.com/" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                                                <a class="youtube" href="https://www.youtube.com/" title="Youtube" target="_blank"><i class="fab fa-youtube"></i></a>
+                                            </div> -->
+                                        </div>
+                                        <div class="team-info">
+                                            <h3 class="mb-0">Raheem Odeyale</h3>
+                                            <span class="d-block thm-clr">Financial Secretary</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-lg-3">
+                                    <div class="team-box text-center w-100">
+                                        <div class="team-img overflow-hidden position-relative w-100">
+                                            <!-- <img class="img-fluid w-100" src="{{ url_for('static', filename='images/resources/team-img1-1.jpg') }}" alt="Team Image 1"> -->
+                                            <!-- <div class="social-links2 text-center d-inline-flex position-absolute">
+                                                <a class="facebook" href="https://www.facebook.com/profile.php?id=100064565504879&mibextid=ZbWKwL" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                                <a class="twitter" href="https://twitter.com/" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                                                <a class="youtube" href="https://www.youtube.com/" title="Youtube" target="_blank"><i class="fab fa-youtube"></i></a>
+                                            </div> -->
+                                        </div>
+                                        <div class="team-info">
+                                            <h3 class="mb-0">Akeem Ogunsegun</h3>
+                                            <span class="d-block thm-clr">Auditor</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-lg-3">
+                                    <div class="team-box text-center w-100">
+                                        <div class="team-img overflow-hidden position-relative w-100">
+                                            <!-- <img class="img-fluid w-100" src="{{ url_for('static', filename='images/resources/team-img1-1.jpg') }}" alt="Team Image 1"> -->
+                                            <!-- <div class="social-links2 text-center d-inline-flex position-absolute">
+                                                <a class="facebook" href="https://www.facebook.com/profile.php?id=100064565504879&mibextid=ZbWKwL" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                                <a class="twitter" href="https://twitter.com/" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                                                <a class="youtube" href="https://www.youtube.com/" title="Youtube" target="_blank"><i class="fab fa-youtube"></i></a>
+                                            </div> -->
+                                        </div>
+                                        <div class="team-info">
+                                            <h3 class="mb-0">Taoheed Dairo</h3>
+                                            <span class="d-block thm-clr">Public Relation Officer</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-lg-3">
+                                    <div class="team-box text-center w-100">
+                                        <div class="team-img overflow-hidden position-relative w-100">
+                                            <!-- <img class="img-fluid w-100" src="{{ url_for('static', filename='images/resources/team-img1-1.jpg') }}" alt="Team Image 1"> -->
+                                            <!-- <div class="social-links2 text-center d-inline-flex position-absolute">
+                                                <a class="facebook" href="https://www.facebook.com/profile.php?id=100064565504879&mibextid=ZbWKwL" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                                <a class="twitter" href="https://twitter.com/" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                                                <a class="youtube" href="https://www.youtube.com/" title="Youtube" target="_blank"><i class="fab fa-youtube"></i></a>
+                                            </div> -->
+                                        </div>
+                                        <div class="team-info">
+                                            <h3 class="mb-0">Shakira Ayanlaja Yussuf</h3>
+                                            <span class="d-block thm-clr">Welfare Secretary</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-lg-3">
+                                    <div class="team-box text-center w-100">
+                                        <div class="team-img overflow-hidden position-relative w-100">
+                                            <!-- <img class="img-fluid w-100" src="{{ url_for('static', filename='images/resources/team-img1-1.jpg') }}" alt="Team Image 1"> -->
+                                            <!-- <div class="social-links2 text-center d-inline-flex position-absolute">
+                                                <a class="facebook" href="https://www.facebook.com/profile.php?id=100064565504879&mibextid=ZbWKwL" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                                <a class="twitter" href="https://twitter.com/" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                                                <a class="youtube" href="https://www.youtube.com/" title="Youtube" target="_blank"><i class="fab fa-youtube"></i></a>
+                                            </div> -->
+                                        </div>
+                                        <div class="team-info">
+                                            <h3 class="mb-0">Idowu Soyege</h3>
+                                            <span class="d-block thm-clr">Provost</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-lg-3">
+                                    <div class="team-box text-center w-100">
+                                        <div class="team-img overflow-hidden position-relative w-100">
+                                            <!-- <img class="img-fluid w-100" src="{{ url_for('static', filename='images/resources/team-img1-1.jpg') }}" alt="Team Image 1"> -->
+                                            <!-- <div class="social-links2 text-center d-inline-flex position-absolute">
+                                                <a class="facebook" href="https://www.facebook.com/profile.php?id=100064565504879&mibextid=ZbWKwL" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                                <a class="twitter" href="https://twitter.com/" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                                                <a class="youtube" href="https://www.youtube.com/" title="Youtube" target="_blank"><i class="fab fa-youtube"></i></a>
+                                            </div> -->
+                                        </div>
+                                        <div class="team-info">
+                                            <h3 class="mb-0">Modinat Akorede</h3>
+                                            <span class="d-block thm-clr">Ex Officio</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-lg-3">
+                                    <div class="team-box text-center w-100">
+                                        <div class="team-img overflow-hidden position-relative w-100">
+                                            <!-- <img class="img-fluid w-100" src="{{ url_for('static', filename='images/resources/team-img1-1.jpg') }}" alt="Team Image 1"> -->
+                                            <!-- <div class="social-links2 text-center d-inline-flex position-absolute">
+                                                <a class="facebook" href="https://www.facebook.com/profile.php?id=100064565504879&mibextid=ZbWKwL" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                                <a class="twitter" href="https://twitter.com/" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                                                <a class="youtube" href="https://www.youtube.com/" title="Youtube" target="_blank"><i class="fab fa-youtube"></i></a>
+                                            </div> -->
+                                        </div>
+                                        <div class="team-info">
+                                            <h3 class="mb-0">Muftau Taofeek</h3>
+                                            <span class="d-block thm-clr">Ex Officio</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-lg-3">
+                                    <div class="team-box text-center w-100">
+                                        <div class="team-img overflow-hidden position-relative w-100">
+                                            <!-- <img class="img-fluid w-100" src="{{ url_for('static', filename='images/resources/team-img1-1.jpg') }}" alt="Team Image 1"> -->
+                                            <!-- <div class="social-links2 text-center d-inline-flex position-absolute">
+                                                <a class="facebook" href="https://www.facebook.com/profile.php?id=100064565504879&mibextid=ZbWKwL" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                                <a class="twitter" href="https://twitter.com/" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                                                <a class="youtube" href="https://www.youtube.com/" title="Youtube" target="_blank"><i class="fab fa-youtube"></i></a>
+                                            </div> -->
+                                        </div>
+                                        <div class="team-info">
+                                            <h3 class="mb-0">Abdulrasak Solebo</h3>
+                                            <span class="d-block thm-clr">Treasurer</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sec-title text-center w-100">
+                            <div class="sec-title-inner d-inline-block">
+                                <i class="thm-clr flaticon-rub-el-hizb"></i>
+                                <h2 class="mb-0">Women's Coordinating Group</h2>
+                            </div>
+                        </div><!-- Sec Title -->
+                        <div class="team-wrap res-row wide-sec2">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-6 col-lg-3">
+                                    <div class="team-box text-center w-100">
+                                        <div class="team-img overflow-hidden position-relative w-100">
+                                            <!-- <img class="img-fluid w-100" src="{{ url_for('static', filename='images/resources/team-img1-1.jpg') }}" alt="Team Image 1"> -->
+                                            <!-- <div class="social-links2 text-center d-inline-flex position-absolute">
+                                                <a class="facebook" href="https://www.facebook.com/profile.php?id=100064565504879&mibextid=ZbWKwL" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                                <a class="twitter" href="https://twitter.com/" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                                                <a class="youtube" href="https://www.youtube.com/" title="Youtube" target="_blank"><i class="fab fa-youtube"></i></a>
+                                            </div> -->
+                                        </div>
+                                        <div class="team-info">
+                                            <h3 class="mb-0">Toyin Shasi</h3>
+                                            <span class="d-block thm-clr">Women Leader</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-lg-3">
+                                    <div class="team-box text-center w-100">
+                                        <div class="team-img overflow-hidden position-relative w-100">
+                                            <!-- <img class="img-fluid w-100" src="{{ url_for('static', filename='images/resources/team-img1-2.jpg') }}" alt="Team Image 2"> -->
+                                            <!-- <div class="social-links2 text-center d-inline-flex position-absolute">
+                                                <a class="facebook" href="https://www.facebook.com/profile.php?id=100064565504879&mibextid=ZbWKwL" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                                <a class="twitter" href="https://twitter.com/" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                                                <a class="youtube" href="https://www.youtube.com/" title="Youtube" target="_blank"><i class="fab fa-youtube"></i></a>
+                                            </div> -->
+                                        </div>
+                                        <div class="team-info">
+                                            <h3 class="mb-0">Risikat Ajibona</h3>
+                                            <span class="d-block thm-clr">Deputy Leader</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-lg-3">
+                                    <div class="team-box text-center w-100">
+                                        <div class="team-img overflow-hidden position-relative w-100">
+                                            <!-- <img class="img-fluid w-100" src="{{ url_for('static', filename='images/resources/team-img1-3.jpg') }}" alt="Team Image 3"> -->
+                                            <!-- <div class="social-links2 text-center d-inline-flex position-absolute">
+                                                <a class="facebook" href="https://www.facebook.com/profile.php?id=100064565504879&mibextid=ZbWKwL" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                                <a class="twitter" href="https://twitter.com/" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                                                <a class="youtube" href="https://www.youtube.com/" title="Youtube" target="_blank"><i class="fab fa-youtube"></i></a>
+                                            </div> -->
+                                        </div>
+                                        <div class="team-info">
+                                            <h3 class="mb-0">Idowu Soyege</h3>
+                                            <span class="d-block thm-clr">Secretary</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-lg-3">
+                                    <div class="team-box text-center w-100">
+                                        <div class="team-img overflow-hidden position-relative w-100">
+                                            <!-- <img class="img-fluid w-100" src="{{ url_for('static', filename='images/resources/team-img1-4.jpg') }}" alt="Team Image 4"> -->
+                                            <!-- <div class="social-links2 text-center d-inline-flex position-absolute">
+                                                <a class="facebook" href="https://www.facebook.com/profile.php?id=100064565504879&mibextid=ZbWKwL" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                                <a class="twitter" href="https://twitter.com/" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                                                <a class="youtube" href="https://www.youtube.com/" title="Youtube" target="_blank"><i class="fab fa-youtube"></i></a>
+                                            </div> -->
+                                        </div>
+                                        <div class="team-info">
+                                            <h3 class="mb-0">Aishat Abass</h3>
+                                            <span class="d-block thm-clr">Asst. Secretary</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-lg-3">
+                                    <div class="team-box text-center w-100">
+                                        <div class="team-img overflow-hidden position-relative w-100">
+                                            <!-- <img class="img-fluid w-100" src="{{ url_for('static', filename='images/resources/team-img1-4.jpg') }}" alt="Team Image 4"> -->
+                                            <!-- <div class="social-links2 text-center d-inline-flex position-absolute">
+                                                <a class="facebook" href="https://www.facebook.com/profile.php?id=100064565504879&mibextid=ZbWKwL" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                                <a class="twitter" href="https://twitter.com/" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                                                <a class="youtube" href="https://www.youtube.com/" title="Youtube" target="_blank"><i class="fab fa-youtube"></i></a>
+                                            </div> -->
+                                        </div>
+                                        <div class="team-info">
+                                            <h3 class="mb-0">Basirat Adeyemi</h3>
+                                            <span class="d-block thm-clr">Financial Secretary</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-lg-3">
+                                    <div class="team-box text-center w-100">
+                                        <div class="team-img overflow-hidden position-relative w-100">
+                                            <!-- <img class="img-fluid w-100" src="{{ url_for('static', filename='images/resources/team-img1-4.jpg') }}" alt="Team Image 4"> -->
+                                            <!-- <div class="social-links2 text-center d-inline-flex position-absolute">
+                                                <a class="facebook" href="https://www.facebook.com/profile.php?id=100064565504879&mibextid=ZbWKwL" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                                <a class="twitter" href="https://twitter.com/" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                                                <a class="youtube" href="https://www.youtube.com/" title="Youtube" target="_blank"><i class="fab fa-youtube"></i></a>
+                                            </div> -->
+                                        </div>
+                                        <div class="team-info">
+                                            <h3 class="mb-0">Modinat Saka</h3>
+                                            <span class="d-block thm-clr">Treasurer</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-lg-3">
+                                    <div class="team-box text-center w-100">
+                                        <div class="team-img overflow-hidden position-relative w-100">
+                                            <!-- <img class="img-fluid w-100" src="{{ url_for('static', filename='images/resources/team-img1-4.jpg') }}" alt="Team Image 4"> -->
+                                            <!-- <div class="social-links2 text-center d-inline-flex position-absolute">
+                                                <a class="facebook" href="https://www.facebook.com/profile.php?id=100064565504879&mibextid=ZbWKwL" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                                <a class="twitter" href="https://twitter.com/" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                                                <a class="youtube" href="https://www.youtube.com/" title="Youtube" target="_blank"><i class="fab fa-youtube"></i></a>
+                                            </div> -->
+                                        </div>
+                                        <div class="team-info">
+                                            <h3 class="mb-0">Bilikis Onimago</h3>
+                                            <span class="d-block thm-clr">Provost</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sec-title text-center w-100">
+                            <div class="sec-title-inner d-inline-block">
+                                <i class="thm-clr flaticon-rub-el-hizb"></i>
+                                <h2 class="mb-0">Youth Group</h2>
+                            </div>
+                        </div><!-- Sec Title -->
+                        <div class="team-wrap res-row wide-sec2">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-6 col-lg-3">
+                                    <div class="team-box text-center w-100">
+                                        <div class="team-img overflow-hidden position-relative w-100">
+                                            <!-- <img class="img-fluid w-100" src="{{ url_for('static', filename='images/resources/team-img1-1.jpg') }}" alt="Team Image 1"> -->
+                                            <!-- <div class="social-links2 text-center d-inline-flex position-absolute">
+                                                <a class="facebook" href="https://www.facebook.com/profile.php?id=100064565504879&mibextid=ZbWKwL" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                                <a class="twitter" href="https://twitter.com/" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                                                <a class="youtube" href="https://www.youtube.com/" title="Youtube" target="_blank"><i class="fab fa-youtube"></i></a>
+                                            </div> -->
+                                        </div>
+                                        <div class="team-info">
+                                            <h3 class="mb-0">Murtadha Alli</h3>
+                                            <span class="d-block thm-clr">Coordinator</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sec-title text-center w-100">
+                            <div class="sec-title-inner d-inline-block">
+                                <i class="thm-clr flaticon-rub-el-hizb"></i>
+                                <h2 class="mb-0">N.I.A Weekend Quranic & Arabic School</h2>
+                            </div>
+                        </div><!-- Sec Title -->
+                        <div class="team-wrap res-row wide-sec2">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-6 col-lg-3">
+                                    <div class="team-box text-center w-100">
+                                        <div class="team-img overflow-hidden position-relative w-100">
+                                            <!-- <img class="img-fluid w-100" src="{{ url_for('static', filename='images/resources/team-img1-1.jpg') }}" alt="Team Image 1"> -->
+                                            <!-- <div class="social-links2 text-center d-inline-flex position-absolute">
+                                                <a class="facebook" href="https://www.facebook.com/profile.php?id=100064565504879&mibextid=ZbWKwL" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                                <a class="twitter" href="https://twitter.com/" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                                                <a class="youtube" href="https://www.youtube.com/" title="Youtube" target="_blank"><i class="fab fa-youtube"></i></a>
+                                            </div> -->
+                                        </div>
+                                        <div class="team-info">
+                                            <h3 class="mb-0">Sheikh Yahya Ali</h3>
+                                            <span class="d-block thm-clr">Principal</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-lg-3">
+                                    <div class="team-box text-center w-100">
+                                        <div class="team-img overflow-hidden position-relative w-100">
+                                            <!-- <img class="img-fluid w-100" src="{{ url_for('static', filename='images/resources/team-img1-2.jpg') }}" alt="Team Image 2"> -->
+                                            <!-- <div class="social-links2 text-center d-inline-flex position-absolute">
+                                                <a class="facebook" href="https://www.facebook.com/profile.php?id=100064565504879&mibextid=ZbWKwL" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                                <a class="twitter" href="https://twitter.com/" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                                                <a class="youtube" href="https://www.youtube.com/" title="Youtube" target="_blank"><i class="fab fa-youtube"></i></a>
+                                            </div> -->
+                                        </div>
+                                        <div class="team-info">
+                                            <h3 class="mb-0">Uztadh Mustapha Oluwa</h3>
+                                            <span class="d-block thm-clr">Vice Principal/Admin</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-lg-3">
+                                    <div class="team-box text-center w-100">
+                                        <div class="team-img overflow-hidden position-relative w-100">
+                                            <!-- <img class="img-fluid w-100" src="{{ url_for('static', filename='images/resources/team-img1-3.jpg') }}" alt="Team Image 3"> -->
+                                            <!-- <div class="social-links2 text-center d-inline-flex position-absolute">
+                                                <a class="facebook" href="https://www.facebook.com/profile.php?id=100064565504879&mibextid=ZbWKwL" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                                <a class="twitter" href="https://twitter.com/" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                                                <a class="youtube" href="https://www.youtube.com/" title="Youtube" target="_blank"><i class="fab fa-youtube"></i></a>
+                                            </div> -->
+                                        </div>
+                                        <div class="team-info">
+                                            <h3 class="mb-0">Uztadh Saheed Al-Mubarak</h3>
+                                            <span class="d-block thm-clr">Staff teacher</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-lg-3">
+                                    <div class="team-box text-center w-100">
+                                        <div class="team-img overflow-hidden position-relative w-100">
+                                            <!-- <img class="img-fluid w-100" src="{{ url_for('static', filename='images/resources/team-img1-4.jpg') }}" alt="Team Image 4"> -->
+                                            <!-- <div class="social-links2 text-center d-inline-flex position-absolute">
+                                                <a class="facebook" href="https://www.facebook.com/profile.php?id=100064565504879&mibextid=ZbWKwL" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                                <a class="twitter" href="https://twitter.com/" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                                                <a class="youtube" href="https://www.youtube.com/" title="Youtube" target="_blank"><i class="fab fa-youtube"></i></a>
+                                            </div> -->
+                                        </div>
+                                        <div class="team-info">
+                                            <h3 class="mb-0">Uztadh Nameer Al-Ali</h3>
+                                            <span class="d-block thm-clr">Staff teacher</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-lg-3">
+                                    <div class="team-box text-center w-100">
+                                        <div class="team-img overflow-hidden position-relative w-100">
+                                            <!-- <img class="img-fluid w-100" src="{{ url_for('static', filename='images/resources/team-img1-1.jpg') }}" alt="Team Image 1"> -->
+                                            <!-- <div class="social-links2 text-center d-inline-flex position-absolute">
+                                                <a class="facebook" href="https://www.facebook.com/profile.php?id=100064565504879&mibextid=ZbWKwL" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                                <a class="twitter" href="https://twitter.com/" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                                                <a class="youtube" href="https://www.youtube.com/" title="Youtube" target="_blank"><i class="fab fa-youtube"></i></a>
+                                            </div> -->
+                                        </div>
+                                        <div class="team-info">
+                                            <h3 class="mb-0">Uztadh AbdulHakeem Salaudeen</h3>
+                                            <span class="d-block thm-clr">Staff teacher</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-lg-3">
+                                    <div class="team-box text-center w-100">
+                                        <div class="team-img overflow-hidden position-relative w-100">
+                                            <!-- <img class="img-fluid w-100" src="{{ url_for('static', filename='images/resources/team-img1-2.jpg') }}" alt="Team Image 2"> -->
+                                            <!-- <div class="social-links2 text-center d-inline-flex position-absolute">
+                                                <a class="facebook" href="https://www.facebook.com/profile.php?id=100064565504879&mibextid=ZbWKwL" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                                <a class="twitter" href="https://twitter.com/" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                                                <a class="youtube" href="https://www.youtube.com/" title="Youtube" target="_blank"><i class="fab fa-youtube"></i></a>
+                                            </div> -->
+                                        </div>
+                                        <div class="team-info">
+                                            <h3 class="mb-0">Uztadh AbdulFatah Amoranbini</h3>
+                                            <span class="d-block thm-clr">Staff teacher</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-lg-3">
+                                    <div class="team-box text-center w-100">
+                                        <div class="team-img overflow-hidden position-relative w-100">
+                                            <!-- <img class="img-fluid w-100" src="{{ url_for('static', filename='images/resources/team-img1-3.jpg') }}" alt="Team Image 3"> -->
+                                            <!-- <div class="social-links2 text-center d-inline-flex position-absolute">
+                                                <a class="facebook" href="https://www.facebook.com/profile.php?id=100064565504879&mibextid=ZbWKwL" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                                <a class="twitter" href="https://twitter.com/" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                                                <a class="youtube" href="https://www.youtube.com/" title="Youtube" target="_blank"><i class="fab fa-youtube"></i></a>
+                                            </div> -->
+                                        </div>
+                                        <div class="team-info">
+                                            <h3 class="mb-0">Uztadha Humulhire Ibrahim</h3>
+                                            <span class="d-block thm-clr">Staff teacher/Admin</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-lg-3">
+                                    <div class="team-box text-center w-100">
+                                        <div class="team-img overflow-hidden position-relative w-100">
+                                            <!-- <img class="img-fluid w-100" src="{{ url_for('static', filename='images/resources/team-img1-4.jpg') }}" alt="Team Image 4"> -->
+                                            <!-- <div class="social-links2 text-center d-inline-flex position-absolute">
+                                                <a class="facebook" href="https://www.facebook.com/profile.php?id=100064565504879&mibextid=ZbWKwL" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                                <a class="twitter" href="https://twitter.com/" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                                                <a class="youtube" href="https://www.youtube.com/" title="Youtube" target="_blank"><i class="fab fa-youtube"></i></a>
+                                            </div> -->
+                                        </div>
+                                        <div class="team-info">
+                                            <h3 class="mb-0">Uztadha Ramota Solebo</h3>
+                                            <span class="d-block thm-clr">Staff teacher</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-lg-3">
+                                    <div class="team-box text-center w-100">
+                                        <div class="team-img overflow-hidden position-relative w-100">
+                                            <!-- <img class="img-fluid w-100" src="{{ url_for('static', filename='images/resources/team-img1-3.jpg') }}" alt="Team Image 3"> -->
+                                            <!-- <div class="social-links2 text-center d-inline-flex position-absolute">
+                                                <a class="facebook" href="https://www.facebook.com/profile.php?id=100064565504879&mibextid=ZbWKwL" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                                <a class="twitter" href="https://twitter.com/" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                                                <a class="youtube" href="https://www.youtube.com/" title="Youtube" target="_blank"><i class="fab fa-youtube"></i></a>
+                                            </div> -->
+                                        </div>
+                                        <div class="team-info">
+                                            <h3 class="mb-0">Uztadha Inam Alfidagh</h3>
+                                            <span class="d-block thm-clr">Staff teacher</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-lg-3">
+                                    <div class="team-box text-center w-100">
+                                        <div class="team-img overflow-hidden position-relative w-100">
+                                            <!-- <img class="img-fluid w-100" src="{{ url_for('static', filename='images/resources/team-img1-4.jpg') }}" alt="Team Image 4"> -->
+                                            <!-- <div class="social-links2 text-center d-inline-flex position-absolute">
+                                                <a class="facebook" href="https://www.facebook.com/profile.php?id=100064565504879&mibextid=ZbWKwL" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                                <a class="twitter" href="https://twitter.com/" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                                                <a class="youtube" href="https://www.youtube.com/" title="Youtube" target="_blank"><i class="fab fa-youtube"></i></a>
+                                            </div> -->
+                                        </div>
+                                        <div class="team-info">
+                                            <h3 class="mb-0">Uztadha Fatimo Muhammed</h3>
+                                            <span class="d-block thm-clr">Staff teacher</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Team Wrap -->
+                        <!-- <div class="view-more mt-05 d-inline-block text-center w-100">
+                            <a class="thm-btn thm-bg" href="{{ url_for('scholar_style1') }}" title="">More Scholars<span></span><span></span><span></span><span></span></a>
+                        </div> -->
+                        <!-- View More -->
+                    </div>
+                </div>
+            </section>
+            <footer>
+                <div class="w-100 pt-100 dark-layer pb-50 opc85 position-relative">
+                    <div class="fixed-bg patern-bg back-blend-multiply dark-bg" style="background-image: url('/static/images/pattern-bg.jpg');"></div>
+                    <div class="container">
+                        <div class="footer-data w-100">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-lg-3">
+                                    <div class="widget w-100">
+                                        <!--- <div class="logo"><h1 class="mb-0"><a href="{{ url_for('index') }}" title="Home"><img class="img-fluid" src="{{ url_for('static', filename='images/logo2.png') }}" alt="Logo" srcset="{{ url_for('static', filename='images/default.png') }}"></a></h1></div> --->
+                                        <p class="mb-0">Our mission is to propagate the teachings and practices of Islam among mankind in accordance with the teachings of the Holy Quran and the traditions of the Prophet Muhammad (SAW). <br>
+ Our purpose to propagate the teachings and principles of Islam, to further the education, social, cultural and charitable interests of Islamic communities and mankind and to promote the general welfare of all.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-lg-9">
+                                    <div class="row justify-content-between">
+                                        <div class="col-md-6 col-sm-6 col-lg-6">
+                                            <div class="row">
+                                                <div class="col-md-6 col-sm-6 col-lg-6">
+                                                    <div class="widget w-100">
+                                                        <h4 class="widget-title">Information</h4>
+                                                        <ul class="mb-0 list-unstyled w-100">
+                                                            <!-- <li><a href="{{ url_for('online_courses') }}" title="">Online Courses</a></li> -->
+                                                            <li><a href="{{ url_for('audio_listening') }}" title="">Quran Recitation</a></li>
+                                                            <!-- <li><a href="{{ url_for('blog') }}" title="">Our Blog</a></li> -->
+                                                            <li><a href="{{ url_for('events') }}" title="">Our Events</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-lg-6">
+                                                    <div class="widget w-100">
+                                                        <h4 class="widget-title">Contact Info</h4>
+                                                        <ul class="cont-info-list2 mb-0 list-unstyled w-100">
+                                                            <li><i class="thm-clr">P:</i>773 665 2451</li>
+                                                            <li><i class="thm-clr">E:</i><a href="javascript:void(0);" title="">niaexecutiveboard@gmail.com</a></li>
+                                                            <li>932 W Sheridan Rd, Chicago, Illinois, USA</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 col-sm-6 col-lg-5">
+                                            <h4 class="widget-title">Let Us Help You</h4>
+                                            <div class="row">
+                                                <div class="col-md-6 col-sm-6 col-lg-6">
+                                                    <div class="widget w-100">
+                                                        <ul class="mb-0 list-unstyled w-100">
+                                                            <li><a href="{{ url_for('about') }}" title="">About NIA</a></li>
+                                                            <!-- <li><a href="{{ url_for('urgent_donation') }}" title="">Urgent Donation</a></li> -->
+                                                            <li><a href="{{ url_for('services') }}" title="">Our Services</a></li>
+                                                            <!-- <li><a href="{{ url_for('sermons') }}" title="">Our Sermons</a></li> -->
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-lg-6">
+                                                    <div class="widget w-100">
+                                                        <ul class="mb-0 list-unstyled w-100">
+                                                            <!-- <!-- <li><a href="{{ url_for('products') }}" title="">Our Products</a></li> --> -->
+                                                            <!--- <li><a href="{{ url_for('scholar_style1') }}" title="">Our Scholars</a></li> -->
+                                                            <li><a href="{{ url_for('contact') }}" title="">Contact Us</a></li>
+                                                            <li><a href="{{ url_for('gallery') }}" title="">NIA Gallery</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- Footer Data -->
+                    </div>
+                </div>
+            </footer><!-- Footer -->
+            <div class="bottom-bar dark-bg2 text-center w-100">
+                <p class="mb-0"><a href="{{ url_for('index') }}" title="Home">NIA</a> - Copyright 2023. Design by <a href="https://themeforest.net/user/nauthemes/portfolio" title="Nauthemes" target="_blank">Nauthemes</a></p>
+            </div><!-- Bottom Bar -->
+        </main><!-- Main Wrapper -->
+
+        <script src="{{ url_for('static', filename='/js/jquery.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='/js/popper.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='/js/bootstrap.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='/js/wow.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='/js/counterup.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='/js/jquery.fancybox.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='/js/jquery.bootstrap-touchspin.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='/js/perfect-scrollbar.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='/js/slick.min.js') }}"></script>
+        <!-- <script src="{{ url_for('static', filename='/js/particles.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='/js/particle-int.js') }}"></script> -->
+        <script src="{{ url_for('static', filename='/js/musicplayer-min.js') }}"></script>
+        <script src="{{ url_for('static', filename='/js/custom-scripts.js') }}"></script>
+    </body>	
+</html>
