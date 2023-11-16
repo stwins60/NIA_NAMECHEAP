@@ -3,6 +3,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from dotenv import load_dotenv
 import os
+import re
 
 load_dotenv()
 
@@ -10,6 +11,17 @@ USERNAME = os.getenv('EMAIL')
 SERVER = os.getenv('SERVER')
 SERVER_PASS = os.getenv('SERVER_PASS')
 PORT = os.getenv('PORT')
+
+def ValidateEmail(email):
+    regrex = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w+$'
+    email_domain = ['gmail', 'yahoo', 'hotmail', 'outlook']
+    user_email_domain = email.split('@')[1]
+    user_email_domain = user_email_domain.split('.')[0]
+    
+    if re.fullmatch(regrex, email) and user_email_domain in email_domain:
+        return True
+    else:
+        return False
 
 def sendMyEmail(subject, msg, phone_num, name="nia-pro", email="tdairo16@gmail.com"):
     try:
@@ -70,3 +82,5 @@ def sendMyEmail(subject, msg, phone_num, name="nia-pro", email="tdairo16@gmail.c
         print('Failed to connect to server')
 
 # sendMyEmail('Test', 'This is a test email', '312-838-1977', "Idris", 'idrisniyi94@gmail.com')
+
+# print(ValidateEmail('olajsjxkxk@a.com'))
