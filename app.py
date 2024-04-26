@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, make_response
 from flask_cors import CORS
-from mailer import sendMyEmail
+from mailer import sendMyEmail, ValidateEmail
 import os
 import random
 import helper
@@ -542,6 +542,12 @@ def contact():
         phone_num = request.form['tel']
         msg = request.form['message']
         subject = "NIA Enquiry"
+        if name == '' or email == '' or phone_num == '' or msg == '':
+            flash('Please fill in all the fields')
+            return redirect(url_for('contact'))
+        if not ValidateEmail(email):
+            flash('Please enter a valid email address')
+            return redirect(url_for('contact'))
         sendMyEmail(subject, msg, phone_num, name, email)
         flash('Your message has been sent successfully!')
         return redirect(url_for('contact'))
