@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: nia-deployment
-        image: idrisniyi94/nia-site:latest
+        image: IMAGE_NAME
         resources:
           limits:
             memory: "128Mi"
