@@ -8,8 +8,7 @@ pipeline {
         DEPLOYMENT_NAME = 'nia'
         IMAGE_TAG = "v.0.${env.BUILD_NUMBER}"
         IMAGE_NAME = "${DOCKERHUB_USERNAME}/${DEPLOYMENT_NAME}:${IMAGE_TAG}"
-       
-        BRANCH_NAME = "${env.BRANCH_NAME}"
+        BRANCH_NAME = "${GIT_BRANCH.split('/')[1]}"
         SMTP_SERVER_PASS = credentials('1be23fe9-d2cf-48d5-a5b8-c1b1f9ea6bca')
         PORT = '465'
         SMTP_SERVER = 'smtp.sendgrid.net'
@@ -75,7 +74,7 @@ pipeline {
         stage("Docker Build") {
             steps {
                 script {
-                    sh "docker build -t $IMAGE_NAME:$IMAGE_TAG --build-arg EMAIL=$EMAIL --build-arg SMTP_SERVER=$SMTP_SERVER --build-arg PORT=$PORT --build-arg SMTP_SERVER_PASS=$SMTP_SERVER_PASS ."
+                    sh "docker build -t $IMAGE_NAME --build-arg EMAIL=$EMAIL --build-arg SMTP_SERVER=$SMTP_SERVER --build-arg PORT=$PORT --build-arg SMTP_SERVER_PASS=$SMTP_SERVER_PASS ."
                     echo "Image built successful"
                 }
             }
@@ -83,14 +82,14 @@ pipeline {
         stage("Trivy Image Scan") {
             steps {
                 script {
-                    sh "trivy image $IMAGE_NAME:$IMAGE_TAG"
+                    sh "trivy image $IMAGE_NAME"
                 }
             }
         }
         stage("Docker Push") {
             steps {
                 script {
-                    sh "docker push $IMAGE_NAME:$IMAGE_TAG"
+                    sh "docker push $IMAGE_NAME"
                 }
             }
         }
