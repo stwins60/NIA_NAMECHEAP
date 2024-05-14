@@ -5,6 +5,11 @@ import os
 import random
 import helper
 import quranVerse
+import random
+import aiohttp
+import asyncio
+import threading
+
 
 app = Flask(__name__)
 CORS(app)
@@ -24,10 +29,36 @@ SESSION_COOKIE_TOKEN = f"nia-session-{''.join(random.sample('abcdefghijklmnopqrs
 
 
 
+def get_random_verse():
+    verse = random.randint(1, 6236)
+    return verse
+
+async def fetch_verse(session, verse):
+    url = f'http://api.alquran.cloud/ayah/{verse}/editions/quran-uthmani,en.asad'
+    async with session.get(url) as response:
+        data = await response.json()
+        verse_a = data['data'][0]['text']
+        verse_en = data['data'][1]['text']
+        sura = data['data'][0]['surah']['englishName'] + '(' + str(data['data'][0]['surah']['number']) + '):' + str(data['data'][0]['numberInSurah'])
+        return verse_a, verse_en, sura
+
+async def get_verse():
+    verse = get_random_verse()
+    async with aiohttp.ClientSession() as session:
+        return await fetch_verse(session, verse)
+
+def sync_get_verse():
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+    return loop.run_until_complete(get_verse())
+
 
 @app.route('/')
 @app.route('/index')
 def index():
+    quran_thread = threading.Thread(target=sync_get_verse)
+    quran_thread.start()
+    quran_thread.join()
     # return render_template('index.html')
     solat_times = helper.get_prayer_times()
     geogorian_date = helper.get_gregorian_date()
@@ -40,11 +71,11 @@ def index():
     maghrib = solat_times[5]
     isha = solat_times[6]
     
-    quran = quranVerse.getVerse()
-    quran_verse_a = quran[0]
-    quran_verse_en = quran[1]
-    quran_chapter_no = quran[3]
-    quran_verse_no = quran[4]
+    quran_verse_a, quran_verse_en, sura = sync_get_verse()
+    quran_chapter_no = sura.split(':')[0].split(')')[0]
+    quran_chapter_no = quran_chapter_no.split('(')[1]
+    quran_verse_no = sura.split(':')[1].split(')')[0]
+
     
     response = make_response(
         render_template(

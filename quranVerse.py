@@ -1,22 +1,25 @@
 import random
-import requests as req
+import aiohttp
+import asyncio
 
-def getVerse():
-    verse = random.randint(1,6237)
-    # Get random verse from quran api
-    data = req.get('http://api.alquran.cloud/ayah/{verse}/editions/quran-uthmani,en.asad'.format(verse=random.randint(1, 6236)))
-    data = data.json()
-    # Get the verse
-    verse_a = data['data'][0]['text']
-    verse_en = data['data'][1]['text']
-    sura = data['data'][0]['surah']['englishName']+\
-            '('+str(data['data'][0]['surah']['number'])+'):'+\
-            str(data['data'][0]['numberInSurah'])
-    sura_name = sura.split('(')[0]
-    sura_chapter = sura.split(':')[0].split('(')[1].split(')')[0]
-    sura_verse = sura.split(':')[1]
-    
-    return verse_a, verse_en, sura_name, sura_chapter, sura_verse
+async def fetch_verse(session, verse):
+    url = f'http://api.alquran.cloud/ayah/{verse}/editions/quran-uthmani,en.asad'
+    async with session.get(url) as response:
+        data = await response.json()
+        verse_a = data['data'][0]['text']
+        verse_en = data['data'][1]['text']
+        sura = data['data'][0]['surah']['englishName'] + '(' + str(data['data'][0]['surah']['number']) + '):' + str(data['data'][0]['numberInSurah'])
+        return verse_a, verse_en, sura
 
+async def get_verse():
+    verse = random.randint(1, 6236)
+    async with aiohttp.ClientSession() as session:
+        return await fetch_verse(session, verse)
 
-# print(getVerse()[4])
+def main():
+    loop = asyncio.get_event_loop()
+    verse_a, verse_en, sura = loop.run_until_complete(get_verse())
+    # print(verse_a, verse_en, sura)
+
+if __name__ == "__main__":
+    main()
