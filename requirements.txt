@@ -6,4 +6,4 @@ requests
 stripe
 waitress
 wtf
-aiohttp
+aiohttp>=3.9.0
