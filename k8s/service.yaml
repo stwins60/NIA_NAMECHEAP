@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+namespace: nia-site
+metadata:
+  name: nia-service
+spec:
+  selector:
+    app: nia-deployment
+  ports:
+  - port: 5000
+    targetPort: 5000
+  type: NodePort

@@ -4,8 +4,11 @@ pipeline {
     environment {
         DOCKERHUB_CREDENTIALS = credentials('d4506f04-b98c-47db-95ce-018ceac27ba6')
         SCANNER_HOME= tool 'sonar-scanner'
-        IMAGE_NAME = 'idrisniyi94/nia'
-        IMAGE_TAG = "${env.BUILD_NUMBER}"
+        DOCKERHUB_USERNAME = 'idrisniyi94'
+        DEPLOYMENT_NAME = 'nia'
+        IMAGE_TAG = "v.0.${env.BUILD_NUMBER}"
+        IMAGE_NAME = "${DOCKERHUB_USERNAME}/${DEPLOYMENT_NAME}:${IMAGE_TAG}"
+       
         BRANCH_NAME = "${env.BRANCH_NAME}"
         SMTP_SERVER_PASS = credentials('1be23fe9-d2cf-48d5-a5b8-c1b1f9ea6bca')
         PORT = '465'
@@ -94,18 +97,15 @@ pipeline {
         stage("Deploy") {
             steps {
                 script {
-                    def containerName = 'nia'
-                    def previousTag = sh(script: "docker ps -a | grep ${containerName} | awk '{print \$2}'", returnStdout: true).trim()
-                    def isRunning = sh(script: "docker ps -a | grep ${containerName}", returnStatus: true)
-                    if(isRunning == 0) {
-                        sh "docker rm -f ${containerName}"
-                        slackSend channel: '#alerts', color: 'danger', message: "${containerName} with version ${previousTag} has been removed and replaced with version ${IMAGE_TAG}"
-                        sh "docker run -d --name ${containerName} -p 5239:5000 --restart unless-stopped $IMAGE_NAME:$IMAGE_TAG"
-                        slackSend channel: '#alerts', color: 'good', message: "${containerName} with version ${IMAGE_TAG} has been deployed successfully and currently running at https://nigeriaislamicassociation.org/"
-                    }
-                    else {
-                        sh "docker run -d --name ${containerName} -p 5239:5000 --restart unless-stopped $IMAGE_NAME:$IMAGE_TAG"
-                       slackSend channel: '#alerts', color: 'good', message: "${containerName} with version ${IMAGE_TAG} has been deployed successfully and currently running at https://nigeriaislamicassociation.org/"
+                    dir('./k8s') {
+                        withKubeConfig([credentialsId: '500a0599-809f-4de0-a060-0fdbb6583332', serverUrl: '']) {
+                            sh "sed -i 's|IMAGE_NAME|${env.IMAGE_NAME}|g' deployment.yaml"
+                            sh "kubectl apply -f deployment.yaml"
+                            slackSend channel: '#alerts', color: 'good', message: "Deployment to Kubernetes was successful and currently running on https://nigeriaislamicassociation.org/"
+                        }
+                        def rolloutStatus = sh(script: 'kubectl rollout status deployment/nia', returnStatus: true)
+                        if (rolloutStatus != 0) {
+                            slackSend channel: '#alerts', color: 'danger', message: "Deployment to Kubernetes failed"
                     }
                 }
             }
