@@ -97,7 +97,7 @@ pipeline {
             steps {
                 script {
                     dir('./k8s') {
-                        withKubeConfig([credentialsId: '500a0599-809f-4de0-a060-0fdbb6583332', serverUrl: '']) {
+                        kubeconfig(credentialsId: '500a0599-809f-4de0-a060-0fdbb6583332', serverUrl: '') {
                             sh "sed -i 's|IMAGE_NAME|${env.IMAGE_NAME}|g' deployment.yaml"
                             sh "kubectl apply -f deployment.yaml"
                             slackSend channel: '#alerts', color: 'good', message: "Deployment to Kubernetes was successful and currently running on https://nigeriaislamicassociation.org/"
