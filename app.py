@@ -24,6 +24,7 @@ SESSION_COOKIE_TOKEN = f"nia-session-{''.join(random.sample('abcdefghijklmnopqrs
 
 
 
+
 @app.route('/')
 @app.route('/index')
 def index():
@@ -560,6 +561,19 @@ def site_maintenance():
     response = make_response(render_template('site_maintenance.html'), headers)
     response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
     return response
+
+@app.errorhandler(404)
+def page_not_found(e):
+    response = make_response(render_template('404.html'), headers)
+    response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
+    return response
+
+@app.errorhandler(500)
+def internal_server_error(e):
+    response = make_response(render_template('500.html'), headers)
+    response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
+    return response
+
 
 # if __name__ == "__main__":
 #     app.run(debug=True, host='0.0.0.0', port=5000)

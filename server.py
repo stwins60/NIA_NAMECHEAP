@@ -4,7 +4,7 @@ import logging
 
 if __name__ == '__main__':
 
-    logging.basicConfig(level=logging.INFO,
+    logging.basicConfig(level=logging.DEBUG,
                         filename='waitress.log',
                         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
