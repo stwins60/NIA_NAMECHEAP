@@ -1,4 +1,6 @@
 import requests
+from requests.adapters import HTTPAdapter
+from requests.packages.urllib3.util.retry import Retry
 import datetime
 import time
 import json
@@ -16,8 +18,22 @@ CURRENT_TIME_MINUTE = now.minute
 
 # print(CURRENT_DAY)
 
-url = f"http://api.aladhan.com/v1/calendar?latitude={LATITUDE}&longitude={LONGITUDE}&method=2&month={CURRENT_MONTH}&year={CURRENT_YEAR}"
+url = f"https://api.aladhan.com/v1/calendar?latitude={LATITUDE}&longitude={LONGITUDE}&method=2&month={CURRENT_MONTH}&year={CURRENT_YEAR}"
 
+
+def requests_retry_session(retries=3, backoff_factor=0.3, status_forcelist=(500, 502, 504), session=None):
+    session = session or requests.Session()
+    retry = Retry(
+        total=retries,
+        read=retries,
+        connect=retries,
+        backoff_factor=backoff_factor,
+        status_forcelist=status_forcelist,
+    )
+    adapter = HTTPAdapter(max_retries=retry)
+    session.mount("http://", adapter)
+    session.mount("https://", adapter)
+    return session
 
 # convert to am/pm
 def convert_to_am_pm(time):
@@ -39,7 +55,8 @@ def convert_to_am_pm(time):
 
 
 def get_data():
-    response = requests.get(url)
+    # response = requests.get(url)
+    response = requests_retry_session().get(url)
     data = response.json()
     # print(data)
     filtered_data = data['data'][CURRENT_DAY - 1]['date']
@@ -47,7 +64,8 @@ def get_data():
 
 # get prayer times
 def get_prayer_times():
-    response = requests.get(url)
+    # response = requests.get(url)
+    response = requests_retry_session().get(url)
     data = response.json()
     timings = data['data'][CURRENT_DAY - 1]['timings']
     fajr = timings['Fajr']
@@ -96,7 +114,8 @@ def get_prayer_times():
 
 
 def get_data():
-    response = requests.get(url)
+    # response = requests.get(url)
+    response = requests_retry_session().get(url)
     data = response.json()
     # print(data)
     filtered_data = data['data'][CURRENT_DAY - 1]
