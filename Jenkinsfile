@@ -106,6 +106,7 @@ pipeline {
                         def rolloutStatus = sh(script: 'kubectl rollout status deployment/nia', returnStatus: true)
                         if (rolloutStatus != 0) {
                             slackSend channel: '#alerts', color: 'danger', message: "Deployment to Kubernetes failed"
+                            }
                     }
                 }
             }
