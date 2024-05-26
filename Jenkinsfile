@@ -96,10 +96,12 @@ pipeline {
                             sh "kubectl apply -f service.yaml"
                             slackSend channel: '#alerts', color: 'good', message: "Deployment to Kubernetes was successful and currently running on https://nigeriaislamicassociation.org/"
                         }
-                        def rolloutStatus = sh(script: 'kubectl rollout status deploy $DEPLOYMENT_NAME -n $NAMESPACE', returnStatus: true)
-                        if (rolloutStatus != 0) {
-                            slackSend channel: '#alerts', color: 'danger', message: "Deployment to Kubernetes failed"
-                            }
+                        withKubeCredentials(kubectlCredentials: [[caCertificate: '', clusterName: '', contextName: '', credentialsId: 'fff8a37d-0976-4787-a985-a82f34d8db40', namespace: '', serverUrl: '']]) {
+                            def rolloutStatus = sh(script: 'kubectl rollout status deploy $DEPLOYMENT_NAME -n $NAMESPACE', returnStatus: true)
+                            if (rolloutStatus != 0) {
+                                slackSend channel: '#alerts', color: 'danger', message: "Deployment to Kubernetes failed"
+                                }
+                        }
                     }
                 }
             }
