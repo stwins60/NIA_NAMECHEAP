@@ -2,7 +2,8 @@ pipeline {
     agent any
 
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('d4506f04-b98c-47db-95ce-018ceac27ba6')
+        DOCKERHUB_CREDENTIALS = credentials('	5f8b634a-148a-4067-b996-07b4b3276fba')
+        NVDAPIKEY = credentials('ed62b912-6db4-4d3a-a445-a1799077253e')
         SCANNER_HOME= tool 'sonar-scanner'
         DOCKERHUB_USERNAME = 'idrisniyi94'
         DEPLOYMENT_NAME = 'nia-deployment'
@@ -10,7 +11,7 @@ pipeline {
         IMAGE_NAME = "${DOCKERHUB_USERNAME}/${DEPLOYMENT_NAME}:${IMAGE_TAG}"
         NAMESPACE = 'nia-site'
         BRANCH_NAME = "${GIT_BRANCH.split('/')[1]}"
-        SMTP_SERVER_PASS = credentials('1be23fe9-d2cf-48d5-a5b8-c1b1f9ea6bca')
+        SMTP_SERVER_PASS = credentials('679540cf-8098-405f-96d5-7d0106554cd6')
         PORT = '465'
         SMTP_SERVER = 'smtp.sendgrid.net'
         EMAIL = 'apikey'
@@ -55,7 +56,7 @@ pipeline {
         // }
         stage('OWASP') {
             steps {
-                dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit --nvdApiKey 4bdf4acc-8eae-45c1-bfc4-844d549be812', odcInstallation: 'DP-Check'
+                dependencyCheck additionalArguments: "--scan ./ --disableYarnAudit --disableNodeAudit --nvdApiKey ${env.NVDAPIKEY}", odcInstallation: 'DP-Check'
                 dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
             }
         }
@@ -98,7 +99,7 @@ pipeline {
             steps {
                 script {
                     dir('./k8s') {
-                        kubeconfig(credentialsId: '500a0599-809f-4de0-a060-0fdbb6583332', serverUrl: '') {
+                        kubeconfig(credentialsId: '3f12ff7b-93cb-4ea5-bc21-79bcf5fb1925', serverUrl: '') {
                             sh "sed -i 's|IMAGE_NAME|${env.IMAGE_NAME}|g' deployment.yaml"
                             sh "kubectl apply -f deployment.yaml"
                             sh "kubectl apply -f service.yaml"

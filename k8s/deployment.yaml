@@ -5,6 +5,15 @@ metadata:
   namespace: nia-site
 spec:
   # replicas: 2
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: custom-label
+                operator: In
+                values:
+                  - k8s
   selector:
     matchLabels:
       app: nia-deployment
