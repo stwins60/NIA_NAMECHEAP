@@ -9,6 +9,8 @@ import random
 import aiohttp
 import asyncio
 import threading
+from sentry_sdk.integrations.flask import FlaskIntegration
+import sentry_sdk
 
 
 app = Flask(__name__)
@@ -27,6 +29,16 @@ headers = {
 
 SESSION_COOKIE_TOKEN = f"nia-session-{''.join(random.sample('abcdefghijklmnopqrstuvwxyz1234567890', 32))}"
 
+sentry_sdk.init(
+    dsn="https://5450658eef11bb7d1055b54edfbbf1c7@sentry.africantech.dev/2",
+    enable_tracing=True,
+    traces_sample_rate=1.0,
+    integrations = [
+        FlaskIntegration(
+            transaction_style="url"
+        )
+    ]
+)
 
 
 def get_random_verse():

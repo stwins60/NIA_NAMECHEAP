@@ -7,3 +7,4 @@ stripe
 waitress
 wtf
 aiohttp>=3.9.0
+sentry-sdk[flask]
