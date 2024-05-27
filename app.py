@@ -33,7 +33,7 @@ sentry_sdk.init(
     dsn="https://5450658eef11bb7d1055b54edfbbf1c7@sentry.africantech.dev/2",
     enable_tracing=True,
     traces_sample_rate=1.0,
-    profiling_sample_rate=1.0,
+    profiles_sample_rate=1.0,
     integrations = [
         FlaskIntegration(
             transaction_style="url"
