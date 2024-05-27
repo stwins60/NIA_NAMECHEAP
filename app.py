@@ -10,6 +10,8 @@ import aiohttp
 import asyncio
 import threading
 from sentry_sdk.integrations.flask import FlaskIntegration
+from sentry_sdk.integrations.browser import BrowserTracingIntegration
+from sentry_sdk.integrations.aiohttp import AioHttpIntegration
 import sentry_sdk
 
 
@@ -35,8 +37,14 @@ sentry_sdk.init(
     traces_sample_rate=1.0,
     profiles_sample_rate=1.0,
     integrations = [
+        BrowserTracingIntegration(
+            enable_inp=True
+        ),
         FlaskIntegration(
             transaction_style="url"
+        ),
+        AioHttpIntegration(
+            transaction_style="method_and_path_pattern"
         )
     ]
 )
