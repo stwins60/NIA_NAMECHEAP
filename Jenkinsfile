@@ -122,6 +122,7 @@ pipeline {
                         sentry-cli releases finalize \$SENTRY_RELEASE
                         sentry-cli releases deploys \$SENTRY_RELEASE new -e \$SENTRY_ENV
                     """
+                }
             }
         }
     }
