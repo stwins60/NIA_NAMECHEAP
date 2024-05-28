@@ -14,6 +14,10 @@ pipeline {
         PORT = '465'
         SMTP_SERVER = 'smtp.sendgrid.net'
         EMAIL = 'apikey'
+        SENTRY_AUTH_TOKEN = credentials('e4ccf9be-902b-4c22-8705-6617c5cce5af')
+        SENTRY_ORG = 'sentry'
+        SENTRY_PROJECT = 'nigerian-islamic-association'
+        SENTRY_ENV = 'production'
     }
 
     stages {
@@ -105,6 +109,19 @@ pipeline {
                         }
                     }
                 }
+            }
+        }
+        stage("Release Sentry") {
+            steps {
+                script {
+                    sh "command -v sentry-cli || curl -sL https://sentry.io/get-cli/ | bash"
+                    sh """
+                        export SENTRY_RELEASE=$(sentry-cli releases ${env.BUILD_NUMBER})
+                        sentry-cli releases new -p $SENTRY_PROJECT $SENTRY_RELEASE
+                        sentry-cli releases set-commits --auto $SENTRY_RELEASE
+                        sentry-cli releases finalize $SENTRY_RELEASE
+                        sentry-cli releases deploys $SENTRY_RELEASE new -e $SENTRY_ENV
+                    """
             }
         }
     }
