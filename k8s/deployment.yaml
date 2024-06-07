@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nia-deployment-1
+  name: nia-deployment
   namespace: nia-site
 spec:
   # replicas: 2
@@ -41,6 +41,5 @@ spec:
             port: 5000
           initialDelaySeconds: 5
           periodSeconds: 5
-      - name: nia-deployment
         ports:
         - containerPort: 5000
