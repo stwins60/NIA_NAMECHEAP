@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, make_response
+from flask import Flask, render_template, request, redirect, url_for, flash, make_response, jsonify
 from flask_cors import CORS
 from mailer import sendMyEmail, ValidateEmail
 import os
@@ -221,53 +221,53 @@ def services_detail():
     response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
     return response
 
-@app.route('/blog')
-def blog():
-    solat_times = helper.get_prayer_times()
-    geogorian_date = helper.get_gregorian_date()
-    hijri_date = helper.get_hijri_date()
-    fajr = solat_times[0]
-    sunrise = solat_times[1]
-    sunset = solat_times[2]
-    dhuhr = solat_times[3]
-    asr = solat_times[4]
-    maghrib = solat_times[5]
-    isha = solat_times[6]
-    response = make_response(render_template('blog.html', sunrise=sunrise, sunset=sunset), headers)
-    response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
-    return response
+# @app.route('/blog')
+# def blog():
+#     solat_times = helper.get_prayer_times()
+#     geogorian_date = helper.get_gregorian_date()
+#     hijri_date = helper.get_hijri_date()
+#     fajr = solat_times[0]
+#     sunrise = solat_times[1]
+#     sunset = solat_times[2]
+#     dhuhr = solat_times[3]
+#     asr = solat_times[4]
+#     maghrib = solat_times[5]
+#     isha = solat_times[6]
+#     response = make_response(render_template('blog.html', sunrise=sunrise, sunset=sunset), headers)
+#     response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
+#     return response
 
-@app.route('/blog-detail')
-def blog_detail():
-    solat_times = helper.get_prayer_times()
-    geogorian_date = helper.get_gregorian_date()
-    hijri_date = helper.get_hijri_date()
-    fajr = solat_times[0]
-    sunrise = solat_times[1]
-    sunset = solat_times[2]
-    dhuhr = solat_times[3]
-    asr = solat_times[4]
-    maghrib = solat_times[5]
-    isha = solat_times[6]
-    response = make_response(render_template('blog-detail.html', sunrise=sunrise, sunset=sunset), headers)
-    response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
-    return response
+# @app.route('/blog-detail')
+# def blog_detail():
+#     solat_times = helper.get_prayer_times()
+#     geogorian_date = helper.get_gregorian_date()
+#     hijri_date = helper.get_hijri_date()
+#     fajr = solat_times[0]
+#     sunrise = solat_times[1]
+#     sunset = solat_times[2]
+#     dhuhr = solat_times[3]
+#     asr = solat_times[4]
+#     maghrib = solat_times[5]
+#     isha = solat_times[6]
+#     response = make_response(render_template('blog-detail.html', sunrise=sunrise, sunset=sunset), headers)
+#     response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
+#     return response
 
-@app.route('/blog2')
-def blog2():
-    solat_times = helper.get_prayer_times()
-    geogorian_date = helper.get_gregorian_date()
-    hijri_date = helper.get_hijri_date()
-    fajr = solat_times[0]
-    sunrise = solat_times[1]
-    sunset = solat_times[2]
-    dhuhr = solat_times[3]
-    asr = solat_times[4]
-    maghrib = solat_times[5]
-    isha = solat_times[6]
-    response = make_response(render_template('blog2.html', sunrise=sunrise, sunset=sunset), headers)
-    response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
-    return response
+# @app.route('/blog2')
+# def blog2():
+#     solat_times = helper.get_prayer_times()
+#     geogorian_date = helper.get_gregorian_date()
+#     hijri_date = helper.get_hijri_date()
+#     fajr = solat_times[0]
+#     sunrise = solat_times[1]
+#     sunset = solat_times[2]
+#     dhuhr = solat_times[3]
+#     asr = solat_times[4]
+#     maghrib = solat_times[5]
+#     isha = solat_times[6]
+#     response = make_response(render_template('blog2.html', sunrise=sunrise, sunset=sunset), headers)
+#     response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
+#     return response
 
 @app.route('/events')
 def events():
@@ -381,101 +381,101 @@ def gallery3():
     response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
     return response
 
-@app.route('/products')
-def products():
-    solat_times = helper.get_prayer_times()
-    geogorian_date = helper.get_gregorian_date()
-    hijri_date = helper.get_hijri_date()
-    fajr = solat_times[0]
-    sunrise = solat_times[1]
-    sunset = solat_times[2]
-    dhuhr = solat_times[3]
-    asr = solat_times[4]
-    maghrib = solat_times[5]
-    isha = solat_times[6]
-    response = make_response(render_template('products.html', sunrise=sunrise, sunset=sunset), headers)
-    response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
-    return response
+# @app.route('/products')
+# def products():
+#     solat_times = helper.get_prayer_times()
+#     geogorian_date = helper.get_gregorian_date()
+#     hijri_date = helper.get_hijri_date()
+#     fajr = solat_times[0]
+#     sunrise = solat_times[1]
+#     sunset = solat_times[2]
+#     dhuhr = solat_times[3]
+#     asr = solat_times[4]
+#     maghrib = solat_times[5]
+#     isha = solat_times[6]
+#     response = make_response(render_template('products.html', sunrise=sunrise, sunset=sunset), headers)
+#     response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
+#     return response
 
-@app.route('/product-detail')
-def product_detail():
-    solat_times = helper.get_prayer_times()
-    geogorian_date = helper.get_gregorian_date()
-    hijri_date = helper.get_hijri_date()
-    fajr = solat_times[0]
-    sunrise = solat_times[1]
-    sunset = solat_times[2]
-    dhuhr = solat_times[3]
-    asr = solat_times[4]
-    maghrib = solat_times[5]
-    isha = solat_times[6]
-    response = make_response(render_template('product-detail.html', sunrise=sunrise, sunset=sunset), headers)
-    response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
-    return response
+# @app.route('/product-detail')
+# def product_detail():
+#     solat_times = helper.get_prayer_times()
+#     geogorian_date = helper.get_gregorian_date()
+#     hijri_date = helper.get_hijri_date()
+#     fajr = solat_times[0]
+#     sunrise = solat_times[1]
+#     sunset = solat_times[2]
+#     dhuhr = solat_times[3]
+#     asr = solat_times[4]
+#     maghrib = solat_times[5]
+#     isha = solat_times[6]
+#     response = make_response(render_template('product-detail.html', sunrise=sunrise, sunset=sunset), headers)
+#     response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
+#     return response
 
-@app.route('/cart')
-def cart():
-    solat_times = helper.get_prayer_times()
-    geogorian_date = helper.get_gregorian_date()
-    hijri_date = helper.get_hijri_date()
-    fajr = solat_times[0]
-    sunrise = solat_times[1]
-    sunset = solat_times[2]
-    dhuhr = solat_times[3]
-    asr = solat_times[4]
-    maghrib = solat_times[5]
-    isha = solat_times[6]
-    response = make_response(render_template('cart.html', sunrise=sunrise, sunset=sunset), headers)
-    response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
-    return response
+# @app.route('/cart')
+# def cart():
+#     solat_times = helper.get_prayer_times()
+#     geogorian_date = helper.get_gregorian_date()
+#     hijri_date = helper.get_hijri_date()
+#     fajr = solat_times[0]
+#     sunrise = solat_times[1]
+#     sunset = solat_times[2]
+#     dhuhr = solat_times[3]
+#     asr = solat_times[4]
+#     maghrib = solat_times[5]
+#     isha = solat_times[6]
+#     response = make_response(render_template('cart.html', sunrise=sunrise, sunset=sunset), headers)
+#     response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
+#     return response
 
-@app.route('/checkout')
-def checkout():
-    solat_times = helper.get_prayer_times()
-    geogorian_date = helper.get_gregorian_date()
-    hijri_date = helper.get_hijri_date()
-    fajr = solat_times[0]
-    sunrise = solat_times[1]
-    sunset = solat_times[2]
-    dhuhr = solat_times[3]
-    asr = solat_times[4]
-    maghrib = solat_times[5]
-    isha = solat_times[6]
-    response = make_response(render_template('checkout.html', sunrise=sunrise, sunset=sunset), headers)
-    response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
-    return response
+# @app.route('/checkout')
+# def checkout():
+#     solat_times = helper.get_prayer_times()
+#     geogorian_date = helper.get_gregorian_date()
+#     hijri_date = helper.get_hijri_date()
+#     fajr = solat_times[0]
+#     sunrise = solat_times[1]
+#     sunset = solat_times[2]
+#     dhuhr = solat_times[3]
+#     asr = solat_times[4]
+#     maghrib = solat_times[5]
+#     isha = solat_times[6]
+#     response = make_response(render_template('checkout.html', sunrise=sunrise, sunset=sunset), headers)
+#     response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
+#     return response
 
-@app.route('/online-courses')
-def online_courses():
-    solat_times = helper.get_prayer_times()
-    geogorian_date = helper.get_gregorian_date()
-    hijri_date = helper.get_hijri_date()
-    fajr = solat_times[0]
-    sunrise = solat_times[1]
-    sunset = solat_times[2]
-    dhuhr = solat_times[3]
-    asr = solat_times[4]
-    maghrib = solat_times[5]
-    isha = solat_times[6]
-    response = make_response(render_template('online-courses.html', sunrise=sunrise, sunset=sunset), headers)
-    response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
-    return response
+# @app.route('/online-courses')
+# def online_courses():
+#     solat_times = helper.get_prayer_times()
+#     geogorian_date = helper.get_gregorian_date()
+#     hijri_date = helper.get_hijri_date()
+#     fajr = solat_times[0]
+#     sunrise = solat_times[1]
+#     sunset = solat_times[2]
+#     dhuhr = solat_times[3]
+#     asr = solat_times[4]
+#     maghrib = solat_times[5]
+#     isha = solat_times[6]
+#     response = make_response(render_template('online-courses.html', sunrise=sunrise, sunset=sunset), headers)
+#     response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
+#     return response
 
-@app.route('/online-courses-detail')
-def online_courses_detail():
-    solat_times = helper.get_prayer_times()
-    geogorian_date = helper.get_gregorian_date()
-    hijri_date = helper.get_hijri_date()
-    fajr = solat_times[0]
-    sunrise = solat_times[1]
-    sunset = solat_times[2]
-    dhuhr = solat_times[3]
-    asr = solat_times[4]
-    maghrib = solat_times[5]
-    isha = solat_times[6]
-    response = make_response(render_template('online-courses-detail.html', sunrise=sunrise, sunset=sunset), headers)
-    response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
-    return response
+# @app.route('/online-courses-detail')
+# def online_courses_detail():
+#     solat_times = helper.get_prayer_times()
+#     geogorian_date = helper.get_gregorian_date()
+#     hijri_date = helper.get_hijri_date()
+#     fajr = solat_times[0]
+#     sunrise = solat_times[1]
+#     sunset = solat_times[2]
+#     dhuhr = solat_times[3]
+#     asr = solat_times[4]
+#     maghrib = solat_times[5]
+#     isha = solat_times[6]
+#     response = make_response(render_template('online-courses-detail.html', sunrise=sunrise, sunset=sunset), headers)
+#     response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
+#     return response
 
 @app.route('/scholar-style1')
 def scholar_style1():
@@ -525,37 +525,37 @@ def scholar_detail():
     response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
     return response
 
-@app.route('/sermons')
-def sermons():
-    solat_times = helper.get_prayer_times()
-    geogorian_date = helper.get_gregorian_date()
-    hijri_date = helper.get_hijri_date()
-    fajr = solat_times[0]
-    sunrise = solat_times[1]
-    sunset = solat_times[2]
-    dhuhr = solat_times[3]
-    asr = solat_times[4]
-    maghrib = solat_times[5]
-    isha = solat_times[6]
-    response = make_response(render_template('sermons.html', sunrise=sunrise, sunset=sunset), headers)
-    response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
-    return response
+# @app.route('/sermons')
+# def sermons():
+#     solat_times = helper.get_prayer_times()
+#     geogorian_date = helper.get_gregorian_date()
+#     hijri_date = helper.get_hijri_date()
+#     fajr = solat_times[0]
+#     sunrise = solat_times[1]
+#     sunset = solat_times[2]
+#     dhuhr = solat_times[3]
+#     asr = solat_times[4]
+#     maghrib = solat_times[5]
+#     isha = solat_times[6]
+#     response = make_response(render_template('sermons.html', sunrise=sunrise, sunset=sunset), headers)
+#     response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
+#     return response
 
-@app.route('/sermons-detail')
-def sermons_detail():
-    solat_times = helper.get_prayer_times()
-    geogorian_date = helper.get_gregorian_date()
-    hijri_date = helper.get_hijri_date()
-    fajr = solat_times[0]
-    sunrise = solat_times[1]
-    sunset = solat_times[2]
-    dhuhr = solat_times[3]
-    asr = solat_times[4]
-    maghrib = solat_times[5]
-    isha = solat_times[6]
-    response = make_response(render_template('sermons-detail.html', sunrise=sunrise, sunset=sunset), headers)
-    response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
-    return response
+# @app.route('/sermons-detail')
+# def sermons_detail():
+#     solat_times = helper.get_prayer_times()
+#     geogorian_date = helper.get_gregorian_date()
+#     hijri_date = helper.get_hijri_date()
+#     fajr = solat_times[0]
+#     sunrise = solat_times[1]
+#     sunset = solat_times[2]
+#     dhuhr = solat_times[3]
+#     asr = solat_times[4]
+#     maghrib = solat_times[5]
+#     isha = solat_times[6]
+#     response = make_response(render_template('sermons-detail.html', sunrise=sunrise, sunset=sunset), headers)
+#     response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
+#     return response
 
 @app.route('/audio-listening')
 def audio_listening():
@@ -622,6 +622,19 @@ def internal_server_error(e):
     response = make_response(render_template('500.html'), headers)
     response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
     return response
+
+
+@app.route('/health')
+def health_check():
+    response = make_response(jsonify({"status": "ok"}), 200)
+    return response
+
+
+@app.route('/ready')
+def readiness_check():
+    response = make_response(jsonify({"status": "ok"}), 200)
+    return response
+
 
 
 # if __name__ == "__main__":

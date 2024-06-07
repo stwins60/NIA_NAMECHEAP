@@ -3,9 +3,7 @@ import app
 import logging
 
 if __name__ == '__main__':
-
     logging.basicConfig(level=logging.DEBUG,
-                        filename='waitress.log',
                         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
     serve(app.app, host='0.0.0.0', port=5000, threads=6, 
