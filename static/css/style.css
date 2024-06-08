@@ -1069,53 +1069,6 @@ a.play-btn:hover svg .stroke-dotted {
   right: 6.875rem;
 }
 
-/*=== Page Loader Style ===*/
-#preloader {
-  position: fixed;
-  top: 0;
-  z-index: 99999;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  text-align: center;
-  background-color: #fff;
-}
-.preloader-inner {
-  height: 9.375rem;
-  line-height: 9.375rem;
-  width: 9.375rem;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50% , -50%);
-  -ms-transform: translate(-50% , -50%);
-  -o-transform: translate(-50% , -50%);
-  transform: translate(-50% , -50%);
-}
-.preloader-inner:before {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  -webkit-border-radius: 50%;
-  border-radius: 50%;
-  border: 2px solid;
-  -webkit-animation: rotate 5s infinite linear;
-  -ms-animation: rotate 5s infinite linear;
-  -o-animation: rotate 5s infinite linear;
-  animation: rotate 5s infinite linear;
-}
-.preloader-icon {
-  display: inline-block;
-  font-size: 3.75rem;
-  -webkit-animation: zoom2 3s infinite linear;
-  -ms-animation: zoom2 3s infinite linear;
-  -o-animation: zoom2 3s infinite linear;
-  animation: zoom2 3s infinite linear;
-}
-
 @-webkit-keyframes zoom2 {
   0% {
     -webkit-transform: scale(1);

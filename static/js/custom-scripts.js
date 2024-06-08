@@ -798,12 +798,12 @@ $(document).ready(function () {
 }); //===== Document Ready Ends =====//
 
 //===== Window Load =====//
-$(window).on('load',function () {
-  'use strict';
+// $(window).on('load',function () {
+//   'use strict';
   
-  jQuery("#preloader").fadeOut(300);
+//   jQuery("#preloader").fadeOut(300);
 
-});
+// });
 
 //===== Sticky Header =====//
 $(window).on('scroll',function () {
