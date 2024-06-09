@@ -493,15 +493,6 @@ def site_maintenance():
 def page_not_found(e):
     response = make_response(render_template('404.html'), headers)
     response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
-    metrics.register_default(
-    metrics.counter(
-        'page_not_found_counter', 'Request count',
-        labels={
-            'status': lambda: response.status_code,
-            'endpoint': lambda: request.path,
-            }
-        )
-    )
     return response
 
 @app.errorhandler(500)
@@ -509,15 +500,6 @@ def page_not_found(e):
 def internal_server_error(e):
     response = make_response(render_template('500.html'), headers)
     response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
-    metrics.register_default(
-    metrics.counter(
-        'internal_server_error_counter', 'Request count',
-        labels={
-            'status': lambda: response.status_code,
-            'endpoint': lambda: request.path,
-            }
-        )
-    )
     return response
 
 
