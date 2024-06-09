@@ -9,3 +9,4 @@ wtf
 aiohttp>=3.9.0
 sentry-sdk[flask]
 sentry-sdk[aiohttp]
+prometheus-flask-exporter
