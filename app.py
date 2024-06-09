@@ -77,7 +77,6 @@ def sync_get_verse():
 
 @app.route('/')
 @app.route('/index')
-
 @metrics.histogram('index_histogram', 'Request duration for index page')
 @metrics.gauge('index_gauge', 'Request gauge for index page')
 @metrics.summary('index_summary', 'Request summary for index page')
@@ -506,34 +505,15 @@ def internal_server_error(e):
 @metrics.summary('health_summary', 'Request summary for health page')
 def health_check():
     response = make_response(jsonify({"status": "ok"}), 200)
-    metrics.register_default(
-    metrics.counter(
-        'health_counter', 'Request count',
-        labels={
-            'status': lambda: response.status_code,
-            'endpoint': lambda: request.path,
-            }
-        )
-    )
     return response
 
 
 @app.route('/ready')
-
 @metrics.histogram('ready_histogram', 'Request duration for ready page')
 @metrics.gauge('ready_gauge', 'Request gauge for ready page')
 @metrics.summary('ready_summary', 'Request summary for ready page')
 def readiness_check():
     response = make_response(jsonify({"status": "ok"}), 200)
-    metrics.register_default(
-    metrics.counter(
-        'ready_counter', 'Request count',
-        labels={
-            'status': lambda: response.status_code,
-            'endpoint': lambda: request.path,
-            }
-        )
-    )
     return response
 
 # metrics.register_endpoint(health_check)
