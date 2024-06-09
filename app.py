@@ -119,15 +119,6 @@ def index():
             quran_verse_no = quran_verse_no
         ), headers)
     response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
-    metrics.register_default(
-    metrics.counter(
-        'index_counter', 'Request count',
-        labels={
-            'status': lambda: response.status_code,
-            'endpoint': lambda: request.path,
-            }
-        )
-    )
 
     return response
 
@@ -143,15 +134,7 @@ def about():
     sunset = solat_times[2]
     response = make_response(render_template('about.html', sunrise=sunrise, sunset=sunset), headers)
     response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
-    metrics.register_default(
-    metrics.counter(
-        'about_counter', 'Request count',
-        labels={
-            'status': lambda: response.status_code,
-            'endpoint': lambda: request.path,
-            }
-        )
-    )
+
     return response
 
 @app.route('/services')
@@ -165,15 +148,7 @@ def services():
     sunset = solat_times[2]
     response = make_response(render_template('services.html', sunrise=sunrise, sunset=sunset), headers)
     response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
-    metrics.register_default(
-    metrics.counter(
-        'services_counter', 'Request count',
-        labels={
-            'status': lambda: response.status_code,
-            'endpoint': lambda: request.path,
-            }
-        )
-    )
+
     return response
 
 @app.route('/projects')
@@ -187,15 +162,7 @@ def projects():
     sunset = solat_times[2]
     response = make_response(render_template('projects.html', sunrise=sunrise, sunset=sunset), headers)
     response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
-    metrics.register_default(
-    metrics.counter(
-        'projects_counter', 'Request count',
-        labels={
-            'status': lambda: response.status_code,
-            'endpoint': lambda: request.path,
-            }
-        )
-    )
+
     return response
 
 @app.route('/services2')
@@ -209,15 +176,7 @@ def services2():
     sunset = solat_times[2]
     response = make_response(render_template('services2.html', sunrise=sunrise, sunset=sunset), headers)
     response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
-    metrics.register_default(
-    metrics.counter(
-        'services2_counter', 'Request count',
-        labels={
-            'status': lambda: response.status_code,
-            'endpoint': lambda: request.path,
-            }
-        )
-    )
+
     return response
 
 @app.route('/services-detail')
@@ -231,15 +190,7 @@ def services_detail():
     sunset = solat_times[2]
     response = make_response(render_template('services-detail.html', sunrise=sunrise, sunset=sunset), headers)
     response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
-    metrics.register_default(
-    metrics.counter(
-        'services_detail_counter', 'Request count',
-        labels={
-            'status': lambda: response.status_code,
-            'endpoint': lambda: request.path,
-            }
-        )
-    )
+
     return response
 
 @app.route('/events')
@@ -253,15 +204,7 @@ def events():
     sunrise = solat_times[1]
     response = make_response(render_template('events.html', sunrise=sunrise, sunset=sunset), headers)
     response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
-    metrics.register_default(
-    metrics.counter(
-        'events_counter', 'Request count',
-        labels={
-            'status': lambda: response.status_code,
-            'endpoint': lambda: request.path,
-            }
-        )
-    )
+
     return response
 
 @app.route('/event-detail')
@@ -275,15 +218,7 @@ def event_detail():
     sunset = solat_times[2]
     response = make_response(render_template('event-detail.html', sunrise=sunrise, sunset=sunset), headers)
     response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
-    metrics.register_default(
-    metrics.counter(
-        'event_detail_counter', 'Request count',
-        labels={
-            'status': lambda: response.status_code,
-            'endpoint': lambda: request.path,
-            }
-        )
-    )
+
     return response
 
 @app.route('/donation-detail')
@@ -297,15 +232,7 @@ def donation_detail():
     sunset = solat_times[2]
     response = make_response(render_template('donation-detail.html', sunrise=sunrise, sunset=sunset), headers)
     response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
-    metrics.register_default(
-    metrics.counter(
-        'donation_detail_counter', 'Request count',
-        labels={
-            'status': lambda: response.status_code,
-            'endpoint': lambda: request.path,
-            }
-        )
-    )
+
     return response
 
 @app.route('/urgent-donation')
@@ -319,16 +246,7 @@ def urgent_donation():
     sunset = solat_times[2]
     response = make_response(render_template('urgent-donation.html', sunrise=sunrise, sunset=sunset), headers)
     response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
-    metrics.register_default(
-    metrics.counter(
-        'urgent_donation_counter', 'Request count',
-        labels={
-            'status': lambda: response.status_code,
-            'endpoint': lambda: request.path,
-            }
-        )
-    )
-    
+
     return response
 
 @app.route('/gallery')
@@ -342,15 +260,7 @@ def gallery():
     sunset = solat_times[2]
     response = make_response(render_template('gallery.html', sunrise=sunrise, sunset=sunset), headers)
     response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
-    metrics.register_default(
-    metrics.counter(
-        'gallery_counter', 'Request count',
-        labels={
-            'status': lambda: response.status_code,
-            'endpoint': lambda: request.path,
-            }
-        )
-    )
+
     return response
 
 @app.route('/gallery2')
@@ -414,16 +324,7 @@ def audio_listening():
     sunset = solat_times[2]
     response = make_response(render_template('audio-listening.html', sunrise=sunrise, sunset=sunset), headers)
     response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
-    metrics.register_default(
-    metrics.counter(
-        'audio_listening_counter', 'Request count',
-        labels={
-            'status': lambda: response.status_code,
-            'endpoint': lambda: request.path,
-            }
-        )
-    )
-    
+
     return response
 
 @app.route('/contact', methods=['GET', 'POST'])
@@ -453,15 +354,7 @@ def contact():
         return redirect(url_for('contact'))
     response = make_response(render_template('contact.html', sunrise=sunrise, sunset=sunset), headers)
     response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
-    metrics.register_default(
-    metrics.counter(
-        'contact_counter', 'Request count',
-        labels={
-            'status': lambda: response.status_code,
-            'endpoint': lambda: request.path,
-            }
-        )
-    )
+
     return response
 
 @app.route('/site_maintenance')
@@ -472,15 +365,7 @@ def contact():
 def site_maintenance():
     response = make_response(render_template('site_maintenance.html'), headers)
     response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
-    metrics.register_default(
-    metrics.counter(
-        'site_maintenance_counter', 'Request count',
-        labels={
-            'status': lambda: response.status_code,
-            'endpoint': lambda: request.path,
-            }
-        )
-    )
+
     return response
 
 @app.errorhandler(404)
