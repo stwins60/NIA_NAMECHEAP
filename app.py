@@ -32,10 +32,6 @@ headers = {
 
 metrics = PrometheusMetrics(app)
 metrics.info('app_info', 'Nigeria Islamic Association Website', version='1.0.3')
-by_path_counter = metrics.counter(
-    'by_path_counter', 'Request count by request paths',
-    labels={'path': lambda: request.path}
-)
 
 SESSION_COOKIE_TOKEN = f"nia-session-{''.join(random.sample('abcdefghijklmnopqrstuvwxyz1234567890', 32))}"
 
@@ -81,7 +77,7 @@ def sync_get_verse():
 
 @app.route('/')
 @app.route('/index')
-@by_path_counter
+
 @metrics.histogram('index_histogram', 'Request duration for index page')
 @metrics.gauge('index_gauge', 'Request gauge for index page')
 @metrics.summary('index_summary', 'Request summary for index page')
@@ -138,7 +134,7 @@ def index():
 
 
 @app.route('/about')
-@by_path_counter
+
 @metrics.histogram('about_histogram', 'Request duration for about page')
 @metrics.gauge('about_gauge', 'Request gauge for about page')
 @metrics.summary('about_summary', 'Request summary for about page')
@@ -160,7 +156,7 @@ def about():
     return response
 
 @app.route('/services')
-@by_path_counter
+
 @metrics.histogram('services_histogram', 'Request duration for services page')
 @metrics.gauge('services_gauge', 'Request gauge for services page')
 @metrics.summary('services_summary', 'Request summary for services page')
@@ -182,7 +178,7 @@ def services():
     return response
 
 @app.route('/projects')
-@by_path_counter
+
 @metrics.histogram('projects_histogram', 'Request duration for projects page')
 @metrics.gauge('projects_gauge', 'Request gauge for projects page')
 @metrics.summary('projects_summary', 'Request summary for projects page')
@@ -204,7 +200,7 @@ def projects():
     return response
 
 @app.route('/services2')
-@by_path_counter
+
 @metrics.histogram('services2_histogram', 'Request duration for services2 page')
 @metrics.gauge('services2_gauge', 'Request gauge for services2 page')
 @metrics.summary('services2_summary', 'Request summary for services2 page')
@@ -226,7 +222,7 @@ def services2():
     return response
 
 @app.route('/services-detail')
-@by_path_counter
+
 @metrics.histogram('services_detail_histogram', 'Request duration for services_detail page')
 @metrics.gauge('services_detail_gauge', 'Request gauge for services_detail page')
 @metrics.summary('services_detail_summary', 'Request summary for services_detail page')
@@ -248,7 +244,7 @@ def services_detail():
     return response
 
 @app.route('/events')
-@by_path_counter
+
 @metrics.histogram('events_histogram', 'Request duration for events page')
 @metrics.gauge('events_gauge', 'Request gauge for events page')
 @metrics.summary('events_summary', 'Request summary for events page')
@@ -270,7 +266,7 @@ def events():
     return response
 
 @app.route('/event-detail')
-@by_path_counter
+
 @metrics.histogram('event_detail_histogram', 'Request duration for event_detail page')
 @metrics.gauge('event_detail_gauge', 'Request gauge for event_detail page')
 @metrics.summary('event_detail_summary', 'Request summary for event_detail page')
@@ -292,7 +288,7 @@ def event_detail():
     return response
 
 @app.route('/donation-detail')
-@by_path_counter
+
 @metrics.histogram('donation_detail_histogram', 'Request duration for donation_detail page')
 @metrics.gauge('donation_detail_gauge', 'Request gauge for donation_detail page')
 @metrics.summary('donation_detail_summary', 'Request summary for donation_detail page')
@@ -314,7 +310,7 @@ def donation_detail():
     return response
 
 @app.route('/urgent-donation')
-@by_path_counter
+
 @metrics.histogram('urgent_donation_histogram', 'Request duration for urgent_donation page')
 @metrics.gauge('urgent_donation_gauge', 'Request gauge for urgent_donation page')
 @metrics.summary('urgent_donation_summary', 'Request summary for urgent_donation page')
@@ -337,7 +333,7 @@ def urgent_donation():
     return response
 
 @app.route('/gallery')
-@by_path_counter
+
 @metrics.histogram('gallery_histogram', 'Request duration for gallery page')
 @metrics.gauge('gallery_gauge', 'Request gauge for gallery page')
 @metrics.summary('gallery_summary', 'Request summary for gallery page')
@@ -359,7 +355,7 @@ def gallery():
     return response
 
 @app.route('/gallery2')
-@by_path_counter
+
 def gallery2():
     solat_times = helper.get_prayer_times()
     sunrise = solat_times[1]
@@ -369,7 +365,7 @@ def gallery2():
     return response
 
 @app.route('/gallery3')
-@by_path_counter
+
 def gallery3():
     solat_times = helper.get_prayer_times()
     sunrise = solat_times[1]
@@ -379,7 +375,7 @@ def gallery3():
     return response
 
 @app.route('/scholar-style1')
-@by_path_counter
+
 def scholar_style1():
     solat_times = helper.get_prayer_times()
     sunrise = solat_times[1]
@@ -389,7 +385,7 @@ def scholar_style1():
     return response
 
 @app.route('/scholar-style2')
-@by_path_counter
+
 def scholar_style2():
     solat_times = helper.get_prayer_times()
     sunrise = solat_times[1]
@@ -399,7 +395,7 @@ def scholar_style2():
     return response
 
 @app.route('/scholar-detail')
-@by_path_counter
+
 def scholar_detail():
     solat_times = helper.get_prayer_times()
     sunrise = solat_times[1]
@@ -409,7 +405,7 @@ def scholar_detail():
     return response
 
 @app.route('/audio-listening')
-@by_path_counter
+
 @metrics.histogram('audio_listening_histogram', 'Request duration for audio_listening page')
 @metrics.gauge('audio_listening_gauge', 'Request gauge for audio_listening page')
 @metrics.summary('audio_listening_summary', 'Request summary for audio_listening page')
@@ -432,7 +428,7 @@ def audio_listening():
     return response
 
 @app.route('/contact', methods=['GET', 'POST'])
-@by_path_counter
+
 @metrics.histogram('contact_histogram', 'Request duration for contact page')
 @metrics.gauge('contact_gauge', 'Request gauge for contact page')
 @metrics.summary('contact_summary', 'Request summary for contact page')
@@ -470,7 +466,7 @@ def contact():
     return response
 
 @app.route('/site_maintenance')
-@by_path_counter
+
 @metrics.histogram('site_maintenance_histogram', 'Request duration for site_maintenance page')
 @metrics.gauge('site_maintenance_gauge', 'Request gauge for site_maintenance page')
 @metrics.summary('site_maintenance_summary', 'Request summary for site_maintenance page')
@@ -489,14 +485,14 @@ def site_maintenance():
     return response
 
 @app.errorhandler(404)
-@by_path_counter
+
 def page_not_found(e):
     response = make_response(render_template('404.html'), headers)
     response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
     return response
 
 @app.errorhandler(500)
-@by_path_counter
+
 def internal_server_error(e):
     response = make_response(render_template('500.html'), headers)
     response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
@@ -504,7 +500,7 @@ def internal_server_error(e):
 
 
 @app.route('/health')
-@by_path_counter
+
 @metrics.histogram('health_histogram', 'Request duration for health page')
 @metrics.gauge('health_gauge', 'Request gauge for health page')
 @metrics.summary('health_summary', 'Request summary for health page')
@@ -523,7 +519,7 @@ def health_check():
 
 
 @app.route('/ready')
-@by_path_counter
+
 @metrics.histogram('ready_histogram', 'Request duration for ready page')
 @metrics.gauge('ready_gauge', 'Request gauge for ready page')
 @metrics.summary('ready_summary', 'Request summary for ready page')
