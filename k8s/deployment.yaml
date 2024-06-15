@@ -46,12 +46,12 @@ spec:
         env:
         - name: ADMIN_USERNAME
           valueFrom:
-            secretKeyRef:
+            configMapKeyRef:
               name: nia-admin-secret
               key: ADMIN_USERNAME
         - name: ADMIN_PASSWORD
           valueFrom:
-            secretKeyRef:
+            configMapKeyRef:
               name: nia-admin-secret
               key: ADMIN_PASSWORD
          
