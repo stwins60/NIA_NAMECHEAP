@@ -95,7 +95,6 @@ pipeline {
                 script {
                     dir('./k8s') {
                         withKubeCredentials(kubectlCredentials: [[caCertificate: '', clusterName: '', contextName: '', credentialsId: 'fff8a37d-0976-4787-a985-a82f34d8db40', namespace: '', serverUrl: '']]) {
-                            sh "kubectl apply -f secret.yaml"
                             sh "sed -i 's|IMAGE_NAME|${env.IMAGE_NAME}|g' deployment.yaml"
                             sh "kubectl apply -f deployment.yaml"
                             sh "kubectl apply -f service.yaml"

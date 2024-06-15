@@ -3,3 +3,5 @@ __pycache__
 venv
 waitress.log
 event.txt
+k8s/configMap.yaml
+k8s/secret.yaml

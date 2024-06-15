@@ -33,3 +33,5 @@
 LICENSE
 README.md
 event.txt
+**/configMap.yaml
+**/secrets.yaml
