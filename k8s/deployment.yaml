@@ -43,3 +43,16 @@ spec:
           periodSeconds: 5
         ports:
         - containerPort: 5000
+        env:
+        - name: ADMIN_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: nia-admin-secret
+              key: ADMIN_USERNAME
+        - name: ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: nia-admin-secret
+              key: ADMIN_PASSWORD
+         
+        

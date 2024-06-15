@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, make_response, jsonify
+from flask import Flask, render_template, request, redirect, url_for, flash, make_response, jsonify, current_app, session
 from flask_cors import CORS
 from mailer import sendMyEmail, ValidateEmail
 import os
@@ -14,7 +14,11 @@ from sentry_sdk.integrations.asyncio import AsyncioIntegration
 from sentry_sdk.integrations.aiohttp import AioHttpIntegration
 import sentry_sdk
 from prometheus_flask_exporter import PrometheusMetrics
-
+from dotenv import load_dotenv
+from flask_sqlalchemy import SQLAlchemy
+from flask_uploads import UploadSet, configure_uploads, IMAGES
+from passlib.hash import sha256_crypt
+from functools import wraps
 
 app = Flask(__name__)
 CORS(app)
@@ -29,6 +33,15 @@ headers = {
     "Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With",
     "Authorization": "Bearer " + token,
 }
+
+app.config['UPLOADED_PHOTOS_DEST'] = "static/uploads"
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///images.db'
+
+db = SQLAlchemy(app)
+photos = UploadSet('photos', IMAGES)
+configure_uploads(app, photos)
+
+
 
 metrics = PrometheusMetrics(app)
 metrics.info('app_info', 'Nigeria Islamic Association Website', version='1.0.3')
@@ -50,6 +63,10 @@ sentry_sdk.init(
         )
     ]
 )
+load_dotenv()
+# SITE ENVIRONMENT VARIABLES
+ADMIN_USERNAME = os.getenv('ADMIN_USERNAME')
+ADMIN_PASSWORD = os.getenv('ADMIN_PASSWORD')
 
 def get_random_verse():
     verse = random.randint(1, 6236)
@@ -73,6 +90,28 @@ def sync_get_verse():
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
     return loop.run_until_complete(get_verse())
+
+class Image(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    filename = db.Column(db.String(100), nullable=False)
+    
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(100), nullable=False)
+    password = db.Column(db.String(100), nullable=False)
+    
+    def __repr__(self):
+        return f"User('{self.username}')"
+
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if 'logged_in' in session and session['logged_in'] and session['current_user']:
+            return f(*args, **kwargs)
+        else:
+            flash('You need to login first')
+            return redirect(url_for('login'))
+    return decorated_function
 
 
 @app.route('/')
@@ -100,6 +139,13 @@ def index():
     quran_chapter_no = quran_chapter_no.split('(')[1]
     quran_verse_no = sura.split(':')[1].split(')')[0]
 
+    images_db = Image.query.all()
+    images = []
+    for image in images_db:
+        images.append(image.filename)
+    # images = os.getenv('IMAGE')
+    multiple_images = images
+
     
     response = make_response(
         render_template(
@@ -116,7 +162,8 @@ def index():
             quran_verse_a=quran_verse_a,
             quran_verse_en=quran_verse_en,
             quran_chapter_no = quran_chapter_no,
-            quran_verse_no = quran_verse_no
+            quran_verse_no = quran_verse_no,
+            multiple_images=multiple_images
         ), headers)
     response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
 
@@ -357,8 +404,88 @@ def contact():
 
     return response
 
-@app.route('/site_maintenance')
+@app.route('/admin')
+@metrics.histogram('admin_histogram', 'Request duration for admin page')
+@metrics.gauge('admin_gauge', 'Request gauge for admin page')
+@metrics.summary('admin_summary', 'Request summary for admin page')
+@login_required
+def admin():
+    images = Image.query.all()
+    solat_times = helper.get_prayer_times()
+    sunrise = solat_times[1]
+    sunset = solat_times[2]
+    
+    response = make_response(
+        render_template(
+            'admin.html',
+            images=images,
+            sunrise=sunrise,
+            sunset=sunset
+            
+        ), headers)
+    response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
 
+    return response
+
+@app.route('/upload', methods=['POST'])
+@metrics.histogram('upload_histogram', 'Request duration for upload page')
+@metrics.gauge('upload_gauge', 'Request gauge for upload page')
+@metrics.summary('upload_summary', 'Request summary for upload page')
+@login_required
+def upload():
+    if request.method == 'POST':
+        if 'image' in request.files:
+            print(request.files['image'])
+            filename = photos.save(request.files['image'])
+            new_image = Image(filename=filename)
+            db.session.add(new_image)
+            db.session.commit()
+            flash('Image uploaded successfully')
+        return redirect(url_for('admin'))
+
+@app.route('/delete/<int:image_id>', methods=['POST'])
+@metrics.histogram('delete_histogram', 'Request duration for delete page')
+@metrics.gauge('delete_gauge', 'Request gauge for delete page')
+@metrics.summary('delete_summary', 'Request summary for delete page')
+@login_required
+def delete(image_id):
+    image = Image.query.get(image_id)
+    if image:
+        os.remove(os.path.join(app.config['UPLOADED_PHOTOS_DEST'], image.filename))
+        db.session.delete(image)
+        db.session.commit()
+        flash('Image deleted successfully')
+    return redirect(url_for('admin'))
+
+@app.route('/admin/login', methods=['GET', 'POST'])
+@metrics.histogram('admin_login_histogram', 'Request duration for admin_login page')
+@metrics.gauge('admin_login_gauge', 'Request gauge for admin_login page')
+@metrics.summary('admin_login_summary', 'Request summary for admin_login page')
+def admin_login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        
+        if username == ADMIN_USERNAME and password == ADMIN_PASSWORD:
+            session['logged_in'] = True
+            session['current_user'] = username
+            flash('You are now logged in')
+            return redirect(url_for('admin'))
+        else:
+            flash('Invalid login')
+    return render_template('admin-login.html')
+
+@app.route('/admin/logout')
+@metrics.histogram('admin_logout_histogram', 'Request duration for admin_logout page')
+@metrics.gauge('admin_logout_gauge', 'Request gauge for admin_logout page')
+@metrics.summary('admin_logout_summary', 'Request summary for admin_logout page')
+def admin_logout():
+    session['logged_in'] = False
+    session['current_user'] = None
+    flash('You are now logged out')
+    return redirect(url_for('admin_login'))
+
+@app.route('/site_maintenance')
 @metrics.histogram('site_maintenance_histogram', 'Request duration for site_maintenance page')
 @metrics.gauge('site_maintenance_gauge', 'Request gauge for site_maintenance page')
 @metrics.summary('site_maintenance_summary', 'Request summary for site_maintenance page')

@@ -89,6 +89,7 @@
                                 <li><a href="{{ url_for('projects')}}" title="">Projects</a></li>
                                 <li><a href="{{ url_for('about') }}" title="">About Us</a></li>
                                 <li><a href="{{ url_for('contact') }}" title="">Contact Us</a></li>
+                                <li><a href="{{ url_for('admin_login') }}" title="">Admin</a></li>
                             </ul>
                         </div>
                         <div class="header-right">
@@ -387,13 +388,15 @@
                         </div><!-- Sec Title -->
                        <div class="event-wrap w-100">
                             <div class="row">
-                                <div class="col-md-7 col-sm-7 col-lg-6">
-                                    <div class="event-box w-100">
-                                        <div class="event-img overflow-hidden position-relative w-100">
-                                            <a href="#" title=""><img class="img-fluid w-100" src="{{ url_for('static', filename='images/resources/eid/eid-adha-2024.jpg') }}" alt="ramadan_2024_tafsir"></a>
+                                {% for image in multiple_images %}
+                                    <div class="col-md-7 col-sm-7 col-lg-6">
+                                        <div class="event-box w-100">
+                                            <div class="event-img overflow-hidden position-relative w-100">
+                                                <a href="#" title=""><img class="img-fluid w-100" src="{{ url_for('static', filename='uploads/' + image) }}" alt="{{ image }}"></a>
+                                            </div>
                                         </div>
                                     </div>
-                                 </div>
+                                {% endfor %}
                             </div>
                         </div>
 
@@ -428,7 +431,7 @@
                                 <div class="col-md-12 col-sm-12 col-lg-3">
                                     <div class="widget w-100">
                                         <!-- <div class="logo position-relative thm-layer opc7 back-blend-multiply thm-bg" style="background-image: url('/static/images/pattern-bg.jpg');"><h1 class="mb-0" style="margin-top: 0px; padding-top: 0px; font-family: Arial, sans-serif; padding-bottom: 50px;"><a href="{{ url_for('index') }}" title="Home"></a>Nigerian Islamic Association</h1></div> -->
-                                        <p class="mb-0">Our mission is to propagate the teachings and practices of Islam among mankind in accordance with the teachings of the Holy Quran and the traditions of the Prophet Muhammad (SAW). <br>
+                                        <p class="mb-0" style="margin-left: 10px;">Our mission is to propagate the teachings and practices of Islam among mankind in accordance with the teachings of the Holy Quran and the traditions of the Prophet Muhammad (SAW). <br>
  Our purpose to propagate the teachings and principles of Islam, to further the education, social, cultural and charitable interests of Islamic communities and mankind and to promote the general welfare of all.</p>
                                     </div>
                                 </div>
