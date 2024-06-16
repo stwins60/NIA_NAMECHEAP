@@ -25,6 +25,14 @@ CORS(app)
 token = ''.join(random.sample('abcdefghijklmnopqrstuvwxyz1234567890', 32))
 app.secret_key = token
 
+# DB ENVIRONMENT VARIABLES
+DB_HOST = os.getenv('DB_HOST')
+DB_PORT = os.getenv('DB_PORT')
+DB_USER = os.getenv('DB_USER')
+DB_PASSWORD = os.getenv('DB_PASSWORD')
+DB_NAME = os.getenv('DB_NAME')
+
+db_pass = DB_PASSWORD.replace('@', '%40')
 headers = {
     'Content-Type': 'text/html',
     'charset': 'utf-8',
@@ -35,7 +43,8 @@ headers = {
 }
 
 app.config['UPLOADED_PHOTOS_DEST'] = "static/uploads"
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///images.db'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///images.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+pymysql://{DB_USER}:{db_pass}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 
 db = SQLAlchemy(app)
 photos = UploadSet('photos', IMAGES)
@@ -67,6 +76,7 @@ load_dotenv()
 # SITE ENVIRONMENT VARIABLES
 ADMIN_USERNAME = os.getenv('ADMIN_USERNAME')
 ADMIN_PASSWORD = os.getenv('ADMIN_PASSWORD')
+
 
 def get_random_verse():
     verse = random.randint(1, 6236)

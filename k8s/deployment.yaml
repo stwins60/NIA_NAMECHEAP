@@ -54,5 +54,30 @@ spec:
             configMapKeyRef:
               name: nia-admin-secret
               key: ADMIN_PASSWORD
+        - name: DB_USER
+          valueFrom:
+            configMapKeyRef:
+              name: nia-admin-secret
+              key: DB_USERNAME
+        - name: DB_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              name: nia-admin-secret
+              key: DB_PASSWORD
+        - name: DB_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: nia-admin-secret
+              key: DB_NAME
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: nia-admin-secret
+              key: DB_HOST
+        - name: DB_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: nia-admin-secret
+              key: DB_PORT
          
         
