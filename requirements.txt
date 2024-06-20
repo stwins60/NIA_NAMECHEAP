@@ -15,3 +15,4 @@ Flask-SQLAlchemy
 Flask-Reuploaded
 passlib
 pymysql
+cryptography
