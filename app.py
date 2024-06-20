@@ -17,7 +17,6 @@ from prometheus_flask_exporter import PrometheusMetrics
 from dotenv import load_dotenv
 from flask_sqlalchemy import SQLAlchemy
 from flask_uploads import UploadSet, configure_uploads, IMAGES
-from passlib.hash import sha256_crypt
 from functools import wraps
 
 app = Flask(__name__)
