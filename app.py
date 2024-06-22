@@ -18,11 +18,15 @@ from dotenv import load_dotenv
 from flask_sqlalchemy import SQLAlchemy
 from flask_uploads import UploadSet, configure_uploads, IMAGES
 from functools import wraps
+import database
 
 app = Flask(__name__)
 CORS(app)
 token = ''.join(random.sample('abcdefghijklmnopqrstuvwxyz1234567890', 32))
 app.secret_key = token
+
+database = database.Database()
+database.create_DB()
 
 # DB ENVIRONMENT VARIABLES
 DB_HOST = os.getenv('DB_HOST')
