@@ -98,14 +98,26 @@ pipeline {
                             sh "sed -i 's|IMAGE_NAME|${env.IMAGE_NAME}|g' deployment.yaml"
                             sh "kubectl apply -f deployment.yaml"
                             sh "kubectl apply -f service.yaml"
-                            sh "kubectl rollout restart deploy $DEPLOYMENT_NAME -n $NAMESPACE"
-                            slackSend channel: '#alerts', color: 'good', message: "Deployment to Kubernetes was successful and currently running on https://nigeriaislamicassociation.org/"
                         }
                         withKubeCredentials(kubectlCredentials: [[caCertificate: '', clusterName: '', contextName: '', credentialsId: 'fff8a37d-0976-4787-a985-a82f34d8db40', namespace: '', serverUrl: '']]) {
                             def rolloutStatus = sh(script: 'kubectl rollout status deploy $DEPLOYMENT_NAME -n $NAMESPACE', returnStatus: true)
                             if (rolloutStatus != 0) {
-                                slackSend channel: '#alerts', color: 'danger', message: "Deployment to Kubernetes failed"
-                                }
+    // Get the rollout status as a text and send it to Slack
+    def deploymentRolloutStatus = sh(script: "kubectl rollout status deploy ${DEPLOYMENT_NAME} -n ${NAMESPACE}", returnStdout: true).trim()
+    
+    // Get the last error logs
+    def podName = sh(script: "kubectl get pods -n ${NAMESPACE} -l app=${DEPLOYMENT_NAME} -o jsonpath='{.items[-1:].metadata.name}'", returnStdout: true).trim()
+    def lastErrorLogs = sh(script: "kubectl logs ${podName} -n ${NAMESPACE} --tail=50", returnStdout: true).trim()
+    
+    // Send the Slack message with rollout status and last error logs
+    slackSend channel: '#alerts', color: 'danger', message: """Deployment to Kubernetes failed. Check the logs for more information. 
+More Info: ${env.BUILD_URL} 
+Rollout Status: ${deploymentRolloutStatus} 
+Last Error Logs: ${lastErrorLogs}"""
+}
+                            else {
+                                slackSend channel: '#alerts', color: 'good', message: "Deployment to Kubernetes was successful and currently running on https://nigeriaislamicassociation.org/"
+                            }
                         }
                     }
                 }
