@@ -2,8 +2,22 @@ from waitress import serve
 import app
 import logging
 from app import db
+import database
+import os
 
 if __name__ == '__main__':
+      
+      # DB ENVIRONMENT VARIABLES
+      DB_HOST = os.getenv('DB_HOST')
+      DB_PORT = os.getenv('DB_PORT')
+      DB_USER = os.getenv('DB_USER')
+      DB_PASSWORD = os.getenv('DB_PASSWORD')
+      DB_NAME = os.getenv('DB_NAME')
+
+      db_pass = DB_PASSWORD.replace('@', '%40')
+      database = database.Database()
+      database.create_DB()
+      
       with app.app.app_context():
             db.create_all()
       logging.basicConfig(level=logging.DEBUG,

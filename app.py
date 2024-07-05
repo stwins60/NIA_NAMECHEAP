@@ -25,17 +25,9 @@ CORS(app)
 token = ''.join(random.sample('abcdefghijklmnopqrstuvwxyz1234567890', 32))
 app.secret_key = token
 
-database = database.Database()
-database.create_DB()
 
-# DB ENVIRONMENT VARIABLES
-DB_HOST = os.getenv('DB_HOST')
-DB_PORT = os.getenv('DB_PORT')
-DB_USER = os.getenv('DB_USER')
-DB_PASSWORD = os.getenv('DB_PASSWORD')
-DB_NAME = os.getenv('DB_NAME')
 
-db_pass = DB_PASSWORD.replace('@', '%40')
+
 headers = {
     'Content-Type': 'text/html',
     'charset': 'utf-8',
@@ -509,16 +501,16 @@ def site_maintenance():
     return response
 
 @app.errorhandler(404)
-
 def page_not_found(e):
-    response = make_response(render_template('404.html'), headers)
+    response = make_response(render_template('404.html'),404)
+    response.headers.update(headers)
     response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
     return response
 
 @app.errorhandler(500)
-
 def internal_server_error(e):
-    response = make_response(render_template('500.html'), headers)
+    response = make_response(render_template('500.html'),500)
+    response.headers.update(headers)
     response.set_cookie('site-cookie', SESSION_COOKIE_TOKEN)
     return response
 
