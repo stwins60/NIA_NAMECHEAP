@@ -6,6 +6,7 @@
 
 **/.DS_Store
 **/__pycache__
+**/.pytest_cache
 **/.venv
 **/.classpath
 **/.dockerignore
@@ -35,3 +36,5 @@ README.md
 event.txt
 **/configMap.yaml
 **/secrets.yaml
+.coverage
+.coveragerc
