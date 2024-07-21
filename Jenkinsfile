@@ -31,6 +31,15 @@ pipeline {
                 git branch: 'master', url: 'https://github.com/stwins60/NIA_NAMECHEAP.git'
             }
         }
+        stage('Pytest') {
+            steps {
+                script {
+                    sh "python3 -m pip install -r requirements.txt --no-cache-dir --break-system-packages"
+                    sh "pytest --cov=app --cov-report=xml:test-reports/coverage.xml"
+                    junit 'test-reports/*.xml'
+                }
+            }
+        }
         stage('Sonarqube Analysis') {
             steps {
                 script {
@@ -51,7 +60,7 @@ pipeline {
         }
         stage('OWASP') {
             steps {
-                dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit --nvdApiKey b87ece66-8e0f-4246-912f-e1ba1d57f881', odcInstallation: 'DP-Check'
+                dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit --nvdApiKey 24d49913-f86d-4c46-a43c-49388a3383ef', odcInstallation: 'DP-Check'
                 dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
             }
         }

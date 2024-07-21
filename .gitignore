@@ -1,7 +1,11 @@
-__pycache__
+**/__pycache__
 .env
 venv
 waitress.log
 event.txt
 k8s/configMap.yaml
 k8s/secret.yaml
+.vscode
+**/pytest_cache
+.coverage
+.coveragerc
