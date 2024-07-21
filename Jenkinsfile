@@ -140,6 +140,7 @@ pipeline {
                 script {
                     sh "command -v sentry-cli || curl -sL https://sentry.io/get-cli/ | bash"
                     sh '''
+                        sentry-cli login --auth-token $SENTRY_AUTH_TOKEN
                         export SENTRY_RELEASE=$(sentry-cli releases propose-version)
                         sentry-cli releases new -p $SENTRY_PROJECT $SENTRY_RELEASE
                         sentry-cli releases set-commits --auto $SENTRY_RELEASE
