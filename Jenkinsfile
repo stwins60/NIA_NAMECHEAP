@@ -157,10 +157,10 @@ pipeline {
                     sh '''
                         sentry-cli --url https://sentry.africantech.dev login --auth-token $SENTRY_AUTH_TOKEN
                         export SENTRY_RELEASE=$(sentry-cli releases propose-version)
-                        sentry-cli releases new -p $SENTRY_PROJECT $SENTRY_RELEASE
-                        sentry-cli releases set-commits --auto $SENTRY_RELEASE
-                        sentry-cli releases finalize $SENTRY_RELEASE
-                        sentry-cli releases deploys $SENTRY_RELEASE new -e $SENTRY_ENV
+                        sentry-cli --url https://sentry.africantech.dev login --auth-token $SENTRY_AUTH_TOKEN releases new -p $SENTRY_PROJECT $SENTRY_RELEASE
+                        sentry-cli --url https://sentry.africantech.dev login --auth-token $SENTRY_AUTH_TOKEN releases set-commits --auto $SENTRY_RELEASE
+                        sentry-cli --url https://sentry.africantech.dev login --auth-token $SENTRY_AUTH_TOKEN releases finalize $SENTRY_RELEASE
+                        sentry-cli --url https://sentry.africantech.dev login --auth-token $SENTRY_AUTH_TOKEN releases deploys $SENTRY_RELEASE new -e $SENTRY_ENV
                     '''
                 }
             }
