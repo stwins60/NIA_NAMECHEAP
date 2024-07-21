@@ -43,7 +43,7 @@ RUN mkdir -p /app/static/uploads \
 # Leverage a bind mount to requirements.txt to avoid having to copy them into
 # into this layer.
 COPY requirements.txt .
-RUN --mount=type=cache,target=/root/.cache/pip pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Switch to the non-privileged user to run the application.
 USER appuser
