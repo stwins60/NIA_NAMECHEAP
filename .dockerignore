@@ -38,3 +38,4 @@ event.txt
 **/secrets.yaml
 .coverage
 .coveragerc
+**/test-reports

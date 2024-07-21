@@ -9,3 +9,4 @@ k8s/secret.yaml
 **/pytest_cache
 .coverage
 .coveragerc
+**/test-reports

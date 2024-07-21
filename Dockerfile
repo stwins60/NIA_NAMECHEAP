@@ -1,4 +1,4 @@
-FROM python:latest
+FROM python:3.13.0b3-slim 
 
 ARG EMAIL
 ARG SERVER
