@@ -18,7 +18,6 @@ from dotenv import load_dotenv
 from flask_sqlalchemy import SQLAlchemy
 from flask_uploads import UploadSet, configure_uploads, IMAGES
 from functools import wraps
-import database
 
 app = Flask(__name__)
 CORS(app)
