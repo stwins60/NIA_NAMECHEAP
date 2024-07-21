@@ -1,7 +1,4 @@
-# syntax=docker/dockerfile:1
-
-ARG PYTHON_VERSION=3.12
-FROM python:${PYTHON_VERSION}-slim AS base
+FROM python:3.13.0b2-slim 
 
 ARG EMAIL
 ARG SERVER
