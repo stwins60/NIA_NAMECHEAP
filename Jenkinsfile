@@ -36,6 +36,7 @@ pipeline {
                 script {
                     sh "python3 -m pip install -r requirements.txt --no-cache-dir --break-system-packages"
                     sh "pytest --cov=app --cov-report=xml:test-reports/coverage.xml"
+                    sh "ls -la test-reports"
                     junit 'test-reports/*.xml'
                 }
             }
