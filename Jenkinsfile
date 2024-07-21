@@ -37,7 +37,7 @@ pipeline {
                     sh "python3 -m pip install -r requirements.txt --no-cache-dir --break-system-packages"
                     sh "pytest --cov=app --cov-report=xml:test-reports/coverage.xml --junitxml=test-reports/pytest.xml"
                     sh "ls -la test-reports"
-                    junit 'test-reports/*.xml'
+                    junit testResults: 'test-reports/*.xml'
                 }
             }
         }
@@ -139,16 +139,17 @@ pipeline {
             steps {
                 script {
                     sh "command -v sentry-cli || curl -sL https://sentry.io/get-cli/ | bash"
-                    sh """
-                        export SENTRY_RELEASE=\$(sentry-cli releases \${env.BUILD_NUMBER})
-                        sentry-cli releases new -p \$SENTRY_PROJECT \$SENTRY_RELEASE
-                        sentry-cli releases set-commits --auto \$SENTRY_RELEASE
-                        sentry-cli releases finalize \$SENTRY_RELEASE
-                        sentry-cli releases deploys \$SENTRY_RELEASE new -e \$SENTRY_ENV
-                    """
+                    sh '''
+                        export SENTRY_RELEASE=$(sentry-cli releases propose-version)
+                        sentry-cli releases new -p $SENTRY_PROJECT $SENTRY_RELEASE
+                        sentry-cli releases set-commits --auto $SENTRY_RELEASE
+                        sentry-cli releases finalize $SENTRY_RELEASE
+                        sentry-cli releases deploys $SENTRY_RELEASE new -e $SENTRY_ENV
+                    '''
                 }
             }
         }
+
     }
     post {
         success {
