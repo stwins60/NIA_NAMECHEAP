@@ -150,21 +150,21 @@ pipeline {
                 }
             }
         }
-        stage("Release Sentry") {
-            steps {
-                script {
-                    sh "command -v sentry-cli || curl -sL https://sentry.io/get-cli/ | bash"
-                    sh '''
-                        sentry-cli --url https://sentry.africantech.dev login --auth-token $SENTRY_AUTH_TOKEN
-                        export SENTRY_RELEASE=$(sentry-cli releases propose-version)
-                        sentry-cli --url https://sentry.africantech.dev login --auth-token $SENTRY_AUTH_TOKEN releases new -p $SENTRY_PROJECT $SENTRY_RELEASE
-                        sentry-cli --url https://sentry.africantech.dev login --auth-token $SENTRY_AUTH_TOKEN releases set-commits --auto $SENTRY_RELEASE
-                        sentry-cli --url https://sentry.africantech.dev login --auth-token $SENTRY_AUTH_TOKEN releases finalize $SENTRY_RELEASE
-                        sentry-cli --url https://sentry.africantech.dev login --auth-token $SENTRY_AUTH_TOKEN releases deploys $SENTRY_RELEASE new -e $SENTRY_ENV
-                    '''
-                }
-            }
-        }
+        // stage("Release Sentry") {
+        //     steps {
+        //         script {
+        //             sh "command -v sentry-cli || curl -sL https://sentry.io/get-cli/ | bash"
+        //             sh '''
+        //                 sentry-cli --url https://sentry.africantech.dev login --auth-token $SENTRY_AUTH_TOKEN
+        //                 export SENTRY_RELEASE=$(sentry-cli releases propose-version)
+        //                 sentry-cli --url https://sentry.africantech.dev login --auth-token $SENTRY_AUTH_TOKEN releases new -p $SENTRY_PROJECT $SENTRY_RELEASE
+        //                 sentry-cli --url https://sentry.africantech.dev login --auth-token $SENTRY_AUTH_TOKEN releases set-commits --auto $SENTRY_RELEASE
+        //                 sentry-cli --url https://sentry.africantech.dev login --auth-token $SENTRY_AUTH_TOKEN releases finalize $SENTRY_RELEASE
+        //                 sentry-cli releases deploys $SENTRY_RELEASE new -e $SENTRY_ENV
+        //             '''
+        //         }
+        //     }
+        // }
 
     }
     post {
