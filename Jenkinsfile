@@ -123,11 +123,10 @@ pipeline {
                             def readyReplicas = sh(script: "kubectl get deploy ${DEPLOYMENT_NAME} -n ${NAMESPACE} -o jsonpath='{.status.readyReplicas}'", returnStdout: true).trim()
                             def updatedReplicas = sh(script: "kubectl get deploy ${DEPLOYMENT_NAME} -n ${NAMESPACE} -o jsonpath='{.status.updatedReplicas}'", returnStdout: true).trim()
                             def availableReplicas = sh(script: "kubectl get deploy ${DEPLOYMENT_NAME} -n ${NAMESPACE} -o jsonpath='{.status.availableReplicas}'", returnStdout: true).trim()
-
                             // Get the condition of the deployment
                             def deploymentCondition = sh(script: "kubectl get deploy ${DEPLOYMENT_NAME} -n ${NAMESPACE} -o jsonpath='{.status.conditions[?(@.type==\"Available\")].status}'", returnStdout: true).trim()
 
-                            if (rolloutStatus != 0) {
+                            if (rolloutStatus != 0 || deploymentCondition != "True") {
                                 // Send the Slack message with rollout status and last error logs
                                 slackSend channel: '#alerts', color: 'danger', message: """Deployment to Kubernetes failed. Check the logs for more information. 
                                 More Info: ${env.BUILD_URL} 
