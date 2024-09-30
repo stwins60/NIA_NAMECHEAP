@@ -57,7 +57,8 @@ COPY . .
 EXPOSE 5000
 
 # Run the application.
-CMD python server.py
+# CMD python server.py
+CMD python local-env.py
 
 # Healthcheck to ensure the container is running correctly.
 HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
