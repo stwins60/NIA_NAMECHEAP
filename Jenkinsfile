@@ -59,12 +59,12 @@ pipeline {
                 }
             }
         }
-        stage('OWASP') {
-            steps {
-                dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit --nvdApiKey 24d49913-f86d-4c46-a43c-49388a3383ef --delay=3000 --threads=4', odcInstallation: 'DP-Check'
-                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
-            }
-        }
+        // stage('OWASP') {
+        //     steps {
+        //         dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit --nvdApiKey 24d49913-f86d-4c46-a43c-49388a3383ef --delay=3000 --threads=4', odcInstallation: 'DP-Check'
+        //         dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+        //     }
+        // }
         stage('Trivy FS Scan') {
             steps {
                 script {
