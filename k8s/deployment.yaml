@@ -4,7 +4,7 @@ metadata:
   name: nia-deployment
   namespace: nia-site
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: nia-deployment
