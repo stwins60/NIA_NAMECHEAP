@@ -4,6 +4,8 @@ import logging
 from app import db
 import database
 import os
+import ssl
+import os
 
 if __name__ == '__main__':
       
@@ -14,7 +16,16 @@ if __name__ == '__main__':
       DB_PASSWORD = os.getenv('DB_PASSWORD')
       DB_NAME = os.getenv('DB_NAME')
 
+      CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+      CERT = os.path.join(CURRENT_DIR, 'certs/cert.pem')
+      KEY = os.path.join(CURRENT_DIR, 'certs/key.pem')
+
+      context = ssl.SSLContext()
+      context.load_cert_chain(CERT, KEY)
+
+
       db_pass = DB_PASSWORD.replace('@', '%40')
+      
       database = database.Database()
       database.create_DB()
       
@@ -27,5 +38,5 @@ if __name__ == '__main__':
             url_scheme='https', backlog=2048, max_request_header_size=4096, 
             max_request_body_size=1073741824, connection_limit=1000, 
             cleanup_interval=30, channel_timeout=120, asyncore_loop_timeout=1, 
-            asyncore_use_poll=True, expose_tracebacks=False, log_socket_errors=True, 
+            asyncore_use_poll=True, expose_tracebacks=False, log_socket_errors=True, ssl_context=context 
       )

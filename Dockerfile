@@ -59,6 +59,7 @@ EXPOSE 5000
 # Run the application.
 # CMD python server.py
 CMD python local-env.py
+# CMD gunicorn --bind 0.0.0.0:5000 --workers 2 --threads 4 --timeout 0 app:app --keyfile certs/key.pem --certfile certs/cert.pem
 
 # Healthcheck to ensure the container is running correctly.
 HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \

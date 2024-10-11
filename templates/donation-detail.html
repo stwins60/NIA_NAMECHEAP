@@ -231,17 +231,28 @@
                                             <img class="img-fluid w-100" src="{{ url_for('static', filename='images/resources/donation_detail-img1.jpg') }}" alt="Donation Detail Image 1">
                                         </div> -->
                                         <div class="donation_detail-info-wrap d-flex flex-wrap align-items-end w-100">
+                                            <div class="quote-section text-center w-100 mb-3">
+                                                <p style="font-style: italic; font-size: 1.2rem;">
+                                                    “The example of those who spend their wealth in the way of Allah is like a seed [of grain] that sprouts seven ears; in every ear is a hundred grains. Allah multiplies [the reward] for whom He wills, for Allah is vast and knowing.”
+                                                    <br><b>— Quran 2:261</b>
+                                                </p>
+                                            </div>
                                             <div class="urgent-donat-info pat-bg gray-layer opc85 position-relative back-blend-multiply gray-bg w-100" style="background-image: url('/static/images/pattern-bg.jpg');">
                                                 <h3 class="mb-0">Southside Islamic Center</h3>
                                             </div>
-                                            <a class="thm-btn bg-color1" style="margin-top: 20px;" href="https://donate.stripe.com/dR64id6hz0xZgLK7st" title=""><i class="mb-2 fas fa-heart d-block"></i>DONATE NOW<span></span><span></span><span></span><span></span></a>
+                                            <div class="donation-buttons d-flex justify-content-center align-items-center mt-3" style="gap: 10px; margin-top: 20px;">
+                                                <!-- Main Donate Now button -->
+                                                <!-- <a class="thm-btn bg-color1" href="https://donate.stripe.com/dR64id6hz0xZgLK7st" title="">
+                                                    <i class="mb-2 fas fa-heart d-block"></i>DONATE NOW
+                                                </a> -->
+                                                <!-- Donation amount buttons -->
+                                                <a class="thm-btn bg-color1" href="https://donate.stripe.com/20dR64id6hz0xZgLK7st" title="$20 Donation">$20</a>
+                                                <a class="thm-btn bg-color1" href="https://donate.stripe.com/50dR64id6hz0xZgLK7st" title="$50 Donation">$50</a>
+                                                <a class="thm-btn bg-color1" href="https://donate.stripe.com/100dR64id6hz0xZgLK7st" title="$100 Donation">$100</a>
+                                                <a class="thm-btn bg-color1" href="https://donate.stripe.com/500dR64id6hz0xZgLK7st" title="$500 Donation">$500</a>
+                                                <a class="thm-btn bg-color1" href="https://donate.stripe.com/customdR64id6hz0xZgLK7st" title="Custom Donation">Other Amount</a>
+                                            </div>
                                         </div>
-                                        <!-- <div class="post-detail-desc w-100">
-                                            <p class="mb-0">Lorem ipsum dolor sit amProvide rehab facility dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                            <p class="mb-0">Doctors and medical officers sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut lab ore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliq uip ex ea commodo consequat.</p>
-                                            <p class="mb-0">Duis aute irure dolor in reprehenderit in voluptate.exercitation ullamco laboris nisi ut aliquip ex ea commo do consequat. Duis aute irure dolorin reprehenderit in voluptate.Excepteur sint occaecat cupidatat non proi dent, sunt in culpa qui officia deserunt mollit anim id estsunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                                            <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do enim ad minim veniam, quis nostrud exerci tation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate. is nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehende.</p>
-                                        </div>-->
                                     </div>
                                     <hr/>
                                     <div class="col-md-12 col-sm-12 col-lg-9">
@@ -395,14 +406,13 @@
         <script src="{{ url_for('static', filename='js/jquery.bootstrap-touchspin.min.js') }}"></script>
         <script src="{{ url_for('static', filename='js/perfect-scrollbar.min.js') }}"></script>
         <script src="{{ url_for('static', filename='js/slick.min.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/custom-scripts.js') }}"></script> 
-        <script defer data-project="66739a9635115c204ee2c529" src="https://cdn.jsdelivr.net/gh/litlyx/litlyx-js/browser/litlyx.js"></script>
+        <!-- <script src="{{ url_for('static', filename='js/particles.min.js') }}"></script>
         <script src="{{ url_for('static', filename='js/particle-int.js') }}"></script> -->
         <script src="{{ url_for('static', filename='js/musicplayer-min.js') }}"></script>
         <script src="{{ url_for('static', filename='js/ResizeSensor.min.js') }}"></script>
         <script src="{{ url_for('static', filename='js/theia-sticky-sidebar.min.js') }}"></script>
         <script src="{{ url_for('static', filename='js/circle-progress.min.js') }}"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js') }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js'"></script>
         <script src="{{ url_for('static', filename='js/custom-scripts.js') }}"></script>
     </body>	
 </html>
