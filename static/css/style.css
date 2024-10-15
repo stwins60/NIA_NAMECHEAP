@@ -5472,6 +5472,24 @@ ul.children .comment-detail > p {max-width: 100%;}
   padding: 2.56875rem 1.25rem;
   text-align: center;
 }
+.donation-buttons {
+  flex-wrap: wrap;
+}
+
+.donation-buttons a .zakat a {
+  flex: 1 1 45%; /* Adjusts the width of the buttons */
+  margin: 5px;
+}
+
+.one-time-donation a  .zakat a{
+  flex: 1 1 100%; /* One-time donation button takes full width on mobile */
+}
+
+@media (min-width: 768px) {
+  .donation-buttons a {
+      flex: 1 1 20%; /* Adjust button width on larger screens */
+  }
+}
 
 /*=== Event Detail Style ===*/
 .event-detail-info {
