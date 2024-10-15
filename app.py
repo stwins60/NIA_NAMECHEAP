@@ -1,6 +1,5 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, make_response, jsonify, current_app, session, Response, abort
+from flask import Flask, render_template, request, redirect, url_for, flash, make_response, jsonify, current_app, session
 from flask_cors import CORS
-from flask_migrate import Migrate
 from mailer import sendMyEmail, ValidateEmail
 import os
 import random
@@ -14,13 +13,11 @@ from sentry_sdk.integrations.flask import FlaskIntegration
 from sentry_sdk.integrations.asyncio import AsyncioIntegration
 from sentry_sdk.integrations.aiohttp import AioHttpIntegration
 import sentry_sdk
-from sqlalchemy.dialects import mysql
 from prometheus_flask_exporter import PrometheusMetrics
 from dotenv import load_dotenv
 from flask_sqlalchemy import SQLAlchemy
 from flask_uploads import UploadSet, configure_uploads, IMAGES
 from functools import wraps
-from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 CORS(app)
@@ -52,8 +49,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+pymysql://{DB_USER}:{db_pass}@{D
 db = SQLAlchemy(app)
 photos = UploadSet('photos', IMAGES)
 configure_uploads(app, photos)
-
-migrate = Migrate(app, db)
 
 
 
@@ -109,8 +104,6 @@ def sync_get_verse():
 class Image(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     filename = db.Column(db.String(100), nullable=False)
-    data = db.Column(mysql.LONGBLOB, nullable=False)
-    mimetype = db.Column(db.String(100), nullable=False)
     
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -130,10 +123,6 @@ def login_required(f):
             return redirect(url_for('login'))
     return decorated_function
 
-@app.route('/image/<int:image_id>')
-def image(image_id):
-    img = Image.query.get_or_404(image_id)
-    return Response(img.data, mimetype=img.mimetype)
 
 @app.route('/')
 @app.route('/index')
@@ -160,10 +149,10 @@ def index():
     quran_chapter_no = quran_chapter_no.split('(')[1]
     quran_verse_no = sura.split(':')[1].split(')')[0]
 
-    images = Image.query.all()
-    # images = []
-    # for image in images_db:
-    #     images.append(image.filename)
+    images_db = Image.query.all()
+    images = []
+    for image in images_db:
+        images.append(image.filename)
     # images = os.getenv('IMAGE')
     multiple_images = images
 
@@ -454,29 +443,15 @@ def admin():
 @metrics.summary('upload_summary', 'Request summary for upload page')
 @login_required
 def upload():
-    if 'image' not in request.files:
-        flash('No image part in the request')
+    if request.method == 'POST':
+        if 'image' in request.files:
+            print(request.files['image'])
+            filename = photos.save(request.files['image'])
+            new_image = Image(filename=filename)
+            db.session.add(new_image)
+            db.session.commit()
+            flash('Image uploaded successfully')
         return redirect(url_for('admin'))
-
-    image_file = request.files['image']
-    if image_file.filename == '':
-        flash('No image selected for uploading')
-        return redirect(url_for('admin'))
-
-    filename = secure_filename(image_file.filename)
-    mimetype = image_file.mimetype
-    image_data = image_file.read()
-
-    if not mimetype.startswith('image/'):
-        flash('Uploaded file is not an image')
-        return redirect(url_for('admin'))
-
-    new_image = Image(filename=filename, data=image_data, mimetype=mimetype)
-    db.session.add(new_image)
-    db.session.commit()
-    flash('Image uploaded successfully')
-
-    return redirect(url_for('admin'))
 
 @app.route('/delete/<int:image_id>', methods=['POST'])
 @metrics.histogram('delete_histogram', 'Request duration for delete page')
@@ -484,9 +459,9 @@ def upload():
 @metrics.summary('delete_summary', 'Request summary for delete page')
 @login_required
 def delete(image_id):
-    image = Image.query.get_or_404(image_id)
+    image = Image.query.get(image_id)
     if image:
-        # os.remove(os.path.join(app.config['UPLOADED_PHOTOS_DEST'], image.filename))
+        os.remove(os.path.join(app.config['UPLOADED_PHOTOS_DEST'], image.filename))
         db.session.delete(image)
         db.session.commit()
         flash('Image deleted successfully')
