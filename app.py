@@ -23,7 +23,7 @@ from functools import wraps
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True, allow_headers="*", methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"])
 token = ''.join(random.sample('abcdefghijklmnopqrstuvwxyz1234567890', 32))
 app.secret_key = token
 
