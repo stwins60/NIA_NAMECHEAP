@@ -12,7 +12,7 @@ aiohttp>=3.9.0
 sentry-sdk[flask]
 sentry-sdk[aiohttp]
 prometheus-flask-exporter
-werkzeug>=0.16.0 # not directly required, pinned by Snyk to avoid a vulnerability
+werkzeug>=3.1.5 # not directly required, pinned by Snyk to avoid a vulnerability
 Flask-SQLAlchemy
 Flask-Reuploaded
 passlib
@@ -23,3 +23,4 @@ pytest
 pytest-cov
 certifi>=2023.7.22 # not directly required, pinned by Snyk to avoid a vulnerability
 pyopenssl
+urllib3>=2.6.3 # not directly required, pinned by Snyk to avoid a vulnerability
